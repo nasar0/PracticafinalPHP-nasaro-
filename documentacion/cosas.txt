@@ -1,0 +1,89 @@
+TABLAS 
+INICIO DE SESION Y REGISTRO
+AMIGOS 
+
+
+
+1 PEDIR QUE INICIE SESION 
+    1.1 SI ENTRA QUE MUESTRE LA AGENDA SINO NO DEJARLE ENTRAR 
+
+2 MENU AMIGOS 
+    2.1 DOS BOTONES INSERTAR AMIGOS Y BUSCAR AMIGOS
+        2.1.1 DATOS fecha de nacimiento en formato español , Y PARA MODIFICAR
+    2.2 INSERTAR AMIGOS FORMULARIO  , NOMBRE , APELLIDO Y FECHA DE NACIMIENTO
+    2.3 BUSCAR AMIGO SE PUEDE BUSCAR POR NOMBRE O APELLIDO
+    2.4 MODIFICAR DATOS DE AMIGO
+
+3 MENU JUEGO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tablas propuestas para la base de datos:
+1. Tabla usuarios
+Columnas:
+    id_usuario (INT, PRIMARY KEY, AUTO_INCREMENT)
+    nombre_usuario (VARCHAR)
+    contrasena (VARCHAR)
+    email (VARCHAR, opcional)
+2. Tabla amigos
+Columnas:
+    id_amigo (INT, PRIMARY KEY, AUTO_INCREMENT)
+    id_usuario (INT, FOREIGN KEY)
+    nombre (VARCHAR)
+    apellido (VARCHAR)
+    fecha_nacimiento (DATE)
+3. Tabla juegos
+Columnas:
+    id_juego (INT, PRIMARY KEY, AUTO_INCREMENT)
+    id_usuario (INT, FOREIGN KEY)
+    titulo (VARCHAR)
+    plataforma (VARCHAR)
+    anio_lanzamiento (YEAR)
+    foto (VARCHAR)
+4. Tabla prestamos
+Columnas:
+    id_prestamo (INT, PRIMARY KEY, AUTO_INCREMENT)
+    id_amigo (INT, FOREIGN KEY)
+    id_juego (INT, FOREIGN KEY)
+    fecha_prestamo (DATE)
+    devuelto (BOOLEAN)
+
+
+
+Funcionalidades del sistema:
+Inicio de sesión:
+
+Verificar las credenciales en la tabla usuarios.
+Redirigir al menú principal si el inicio es exitoso.
+Gestión de amigos:
+
+Insertar: Formulario para agregar un amigo con nombre, apellido y fecha de nacimiento.
+Listar: Mostrar todos los amigos del usuario con botón para modificar.
+Buscar: Permitir búsquedas por nombre o apellido.
+Modificar: Formulario con datos prellenados para actualizar.
+Gestión de juegos:
+
+Insertar: Formulario para agregar título, plataforma, año y foto.
+Listar: Mostrar juegos con botones para modificar.
+Buscar: Búsqueda por título o plataforma.
+Gestión de préstamos:
+
+Insertar: Formulario con listas desplegables de amigos y juegos.
+Listar: Mostrar préstamos activos y devueltos con opción para marcar como devuelto.
+Buscar: Búsquedas por amigo o título del juego.
+Administrador:
+
+Gestionar usuarios con las operaciones CRUD.
