@@ -10,10 +10,7 @@
         $pass = $_POST["pass"];
         $usr=new usuarios();
         $validacion=$usr->iniciar_sesion($user,$pass);
-        if ($validacion) {
-            echo"biembenido";
-        }
-
+        
         session_start();
         $_SESSION['user'] = $user;
 
@@ -21,8 +18,9 @@
         if (isset($_POST["mantener"])) {
             setcookie("user",$user,time()+(86400*30),"/");
         }
-        echo $_COOKIE["user"];
-        
+        if ($validacion) {
+            header("Location: listaamigos.php");
+        }
     }
 
     if(isset($_REQUEST['action'])){
