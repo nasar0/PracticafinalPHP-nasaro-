@@ -5,33 +5,23 @@ function mostrar()
 {
     $amigos = new amigos();
     session_start();
-    $user = $_SESSION['user']; // Obtenemos el nombre del usuario actual
-    $listaAmigos = $amigos->listarColegas($user); // Obtenemos la lista de amigos
+    $user = $_SESSION['user'];
+    $listaAmigos = $amigos->listarColegas($user);
+    require_once("../VISTA/amigos.php");
+}
 
-    echo "<table border='1'>
-        <tr>
-            <th>ID Amigo</th>
-            <th>ID Usuario</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Fecha de Nacimiento</th>
-        </tr>";
-
-    foreach ($listaAmigos as $amigo) {
-        echo "<tr>
-            <td>{$amigo->id_amigo}</td>
-            <td>{$amigo->id_usuario}</td>
-            <td>{$amigo->nombre}</td>
-            <td>{$amigo->apellido}</td>
-            <td>{$amigo->fecha}</td>
-          </tr>";
-    }
-
-    echo "</table>";
+function buscador(){
+    require_once("../VISTA/buscador.php");
 }
 
 
-function buscar() {}
+function buscar() {
+    $amigos = new amigos();
+    session_start();
+    $user = $_SESSION['user'];
+    $listaAmigos = $amigos->listarAmigosNombre($_POST["bucador"],$user);
+    require_once("../VISTA/amigos.php");
+}
 
 if (isset($_REQUEST['action'])) {
     $action = $_REQUEST['action'];

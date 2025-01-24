@@ -19,22 +19,65 @@ class amigos
     }
     public function listarColegas($nom)
     {
-        $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario and usuarios.nombre_usuario=? ";
+        if (strcmp($nom, "ADMIN") == 0) {
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario ";
+        } else {
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario and usuarios.nombre_usuario=? ";
+        }
         $consulta = $this->db->getCon()->prepare($sent);
-        $consulta->bind_param("s", $nom);
+        if (strcmp($nom, "ADMIN") != 0) {
+            $consulta->bind_param("s", $nom);
+        }
         $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha);
         $consulta->execute();
-        $amigos = []; 
+        $amigos = [];
 
         while ($consulta->fetch()) {
-            $amigo = new amigos(); 
-            $amigo->id_amigo = $id_amigo; 
+            $amigo = new amigos();
+            $amigo->id_amigo = $id_amigo;
             $amigo->id_usuario = $id_usuario;
             $amigo->nombre = $nombre;
             $amigo->apellido = $apellido;
+            $timestamp = strtotime($fecha);
+            $fecha = date("d/m/Y", $timestamp);
             $amigo->fecha = $fecha;
+            $amigos[] = $amigo;
+        }
 
-            $amigos[] = $amigo; 
+        $consulta->close();
+        return $amigos;
+    }
+    public function __get($nom)
+    {
+        return $this->$nom;
+    }
+    public function listarAmigosNombre($string,$nom){
+        $sent="";
+        $regex = $string."%";
+        if (strcmp($nom, "ADMIN") == 0) {
+            $sent= "SELECT amigos.id_amigo, amigos.id_usuario, amigos.nombre, amigos.apellido, amigos.fecha_nacimiento FROM amigos, usuarios WHERE usuarios.id_usuario = amigos.id_usuario AND amigos.nombre LIKE ? ";
+        } else {
+            $sent= "SELECT amigos.id_amigo, amigos.id_usuario, amigos.nombre, amigos.apellido, amigos.fecha_nacimiento FROM amigos, usuarios WHERE usuarios.id_usuario = amigos.id_usuario AND amigos.nombre LIKE ?  and usuarios.nombre_usuario=? ";
+        }
+        $consulta = $this->db->getCon()->prepare($sent);
+        if (strcmp($nom, "ADMIN") == 0) {
+            $consulta->bind_param("s",$regex);
+        }else{
+            $consulta->bind_param("ss",$regex, $nom);
+        }
+        $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha);
+        $consulta->execute();
+        $amigos = [];
+        while ($consulta->fetch()) {
+            $amigo = new amigos();
+            $amigo->id_amigo = $id_amigo;
+            $amigo->id_usuario = $id_usuario;
+            $amigo->nombre = $nombre;
+            $amigo->apellido = $apellido;
+            $timestamp = strtotime($fecha);
+            $fecha = date("d/m/Y", $timestamp);
+            $amigo->fecha = $fecha;
+            $amigos[] = $amigo;
         }
 
         $consulta->close();
