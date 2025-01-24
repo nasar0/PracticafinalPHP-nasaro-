@@ -14,7 +14,7 @@
         <nav class="row d-flex ">
             <div class="col-4"><SPAn>AGENDA</SPAn>PERSONAL</div>
             <div class="col-6 ofset-2">
-                <a href="" class="text-uppercase">amigos</a>
+                <a href="listaamigos.php?action=mostrar" class="text-uppercase">amigos</a>
                 <a href="" class="text-uppercase">juegos</a>
                 <a href="" class="text-uppercase">prestamos</a>
                 <a href="" class="text-uppercase">salir</a>
@@ -26,7 +26,7 @@
         <section class="container">
             <div class="row d-flex ">
                 <div class="col-12 d-flex justify-content-end ">
-                    <a href="" class="text-uppercase ">Insertar amigos</a>
+                    <a href="listaamigos.php?action=insertarAmigos" class="text-uppercase ">Insertar amigos</a>
                     <a href= "listaamigos.php?action=buscador"   class="text-uppercase ps-3">Buscar amigos</a>
                 </div>
             </div>
