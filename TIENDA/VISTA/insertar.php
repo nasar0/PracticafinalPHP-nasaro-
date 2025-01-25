@@ -7,7 +7,7 @@
     
 </head>
 <body>
-    <form action="../CONTROLADOR/login.php?action=insert" method="post">
+    <form action="../CONTROLADOR/listaamigos.php?action=insert" method="post">
         <div>
             <label for="nombre">Nombre de tu amigo:</label>
             <input type="text" id="nombre" name="nombre" required>

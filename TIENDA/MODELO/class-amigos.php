@@ -47,10 +47,12 @@ class amigos
         $consulta->close();
         return $amigos;
     }
+
     public function __get($nom)
     {
         return $this->$nom;
     }
+
     public function listarAmigosNombre($string,$nom){
         $sent="";
         $regex = $string."%";
@@ -83,12 +85,26 @@ class amigos
         $consulta->close();
         return $amigos;
     }
-    public function insertarAmigos($nom, $ape, $fec) {
+    public function obtenerIDuser($string){
+        $num=0;
+        $sent = "SELECT id_usuario FROM usuarios WHERE nombre_usuario = ?";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("s",$user);
+        $consulta->bind_result($num);
+        $consulta->execute();
+        $consulta->fetch();
+
+        return $num;
+    }
+    public function insertarAmigos($nom, $ape, $fec,$user) {
+        echo $fec;
+        $usu=new amigos();
+        $usu->obtenerIDuser($user);
         try {
-            $sent = "INSERT INTO amigos (nombre, apellido, fecha_nacimiento) VALUES (?, ?, ?)";
+            $sent = "INSERT INTO amigos (id_usuario,nombre,apellido,fecha_nacimiento) VALUES (?,?,?,?)";
             $consulta = $this->db->getCon()->prepare($sent);
     
-            $consulta->bind_param("sss", $nom,$ape,$fec);
+            $consulta->bind_param("isss",$usu,$nom,$ape,$fec);
     
             if ($consulta->execute()) {
                 echo "Amigo insertado correctamente.";
@@ -101,3 +117,5 @@ class amigos
     }
     
 }
+
+

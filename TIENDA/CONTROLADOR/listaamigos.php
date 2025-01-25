@@ -15,7 +15,9 @@ function buscador(){
 }
 function insert(){
     $amigos = new amigos();
-    $amigos->insertarAmigos($_POST["nombre"],$_POST["apellido"],$_POST["fecha_nacimiento"]);
+    session_start();
+    $user = $_SESSION['user'];
+    $amigos->insertarAmigos($_POST["nombre"],$_POST["apellido"],$_POST["fecha_nacimiento"],$user);
 }
 function insertarAmigos(){
     require_once("../VISTA/insertar.php");
