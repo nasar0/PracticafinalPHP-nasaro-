@@ -83,4 +83,21 @@ class amigos
         $consulta->close();
         return $amigos;
     }
+    public function insertarAmigos($nom, $ape, $fec) {
+        try {
+            $sent = "INSERT INTO amigos (nombre, apellido, fecha_nacimiento) VALUES (?, ?, ?)";
+            $consulta = $this->db->getCon()->prepare($sent);
+    
+            $consulta->bind_param("sss", $nom,$ape,$fec);
+    
+            if ($consulta->execute()) {
+                echo "Amigo insertado correctamente.";
+            } else {
+                echo "Error al insertar el amigo.";
+            }
+        } catch (Exception $e) {
+            echo "No se puede insertar: " . $e->getMessage();
+        }
+    }
+    
 }

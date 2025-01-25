@@ -13,7 +13,13 @@ function mostrar()
 function buscador(){
     require_once("../VISTA/buscador.php");
 }
-
+function insert(){
+    $amigos = new amigos();
+    $amigos->insertarAmigos($_POST["nombre"],$_POST["apellido"],$_POST["fecha_nacimiento"]);
+}
+function insertarAmigos(){
+    require_once("../VISTA/insertar.php");
+}
 
 function buscar() {
     $amigos = new amigos();
