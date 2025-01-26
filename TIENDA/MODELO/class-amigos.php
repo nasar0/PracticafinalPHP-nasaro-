@@ -115,7 +115,70 @@ class amigos
             echo "No se puede insertar: " . $e->getMessage();
         }
     }
+    public function obtenerAmigo($id_amigo) {
+        $sent = "SELECT id_amigo, nombre, apellido, fecha_nacimiento FROM amigos WHERE id_amigo = ?";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("i", $id_amigo);
+        $consulta->bind_result($id_amigo, $nombre, $apellido, $fecha_nacimiento);
+        $consulta->execute();
+        $consulta->fetch();
     
+        $amigo = new amigos();
+        $amigo->id_amigo = $id_amigo;
+        $amigo->nombre = $nombre;
+        $amigo->apellido = $apellido;
+        $amigo->fecha = date("d/m/Y", strtotime($fecha_nacimiento));
+    
+        return $amigo;
+    }
+    public function modificarAmigo($id_amigo, $nombre, $apellido, $fecha_nacimiento) {
+        try {
+            $sent = "UPDATE amigos SET nombre = ?, apellido = ?, fecha_nacimiento = ? WHERE id_amigo = ?";
+            $consulta = $this->db->getCon()->prepare($sent);
+    
+            $consulta->bind_param("sssi", $nombre, $apellido, $fecha_nacimiento, $id_amigo);
+    
+            if ($consulta->execute()) {
+                return true; 
+            } else {
+                return false; 
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    public function listarColegas($nom)
+    {
+        if (strcmp($nom, "ADMIN") == 0) {
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario ";
+        } else {
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario and usuarios.nombre_usuario=? ";
+        }
+        $consulta = $this->db->getCon()->prepare($sent);
+        if (strcmp($nom, "ADMIN") != 0) {
+            $consulta->bind_param("s", $nom);
+        }
+        $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha);
+        $consulta->execute();
+        $amigos = [];
+
+        while ($consulta->fetch()) {
+            $amigo = new amigos();
+            $amigo->id_amigo = $id_amigo;
+            $amigo->id_usuario = $id_usuario;
+            $amigo->nombre = $nombre;
+            $amigo->apellido = $apellido;
+            $timestamp = strtotime($fecha);
+            $fecha = date("d/m/Y", $timestamp);
+            $amigo->fecha = $fecha;
+            $amigos[] = $amigo;
+        }
+
+        $consulta->close();
+        return $amigos;
+    }
+
 }
 
 

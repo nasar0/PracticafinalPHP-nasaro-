@@ -15,8 +15,8 @@
             <div class="col-4"><SPAn>AGENDA</SPAn>PERSONAL</div>
             <div class="col-6 ofset-2">
                 <a href="listaamigos.php?action=mostrar" class="text-uppercase">amigos</a>
-                <a href="" class="text-uppercase">juegos</a>
-                <a href="" class="text-uppercase">prestamos</a>
+                <a href="listaamigos.php?action=mostrarJuegos" class="text-uppercase">juegos</a>
+                <a href="listaamigos.php?action=mostrarPrestamos" class="text-uppercase">prestamos</a>
                 <a href="" class="text-uppercase">salir</a>
             </div>
         </nav>
@@ -50,7 +50,9 @@
                     <td>{$amigo->nombre}</td>
                     <td>{$amigo->apellido}</td>
                     <td>{$amigo->fecha}</td>
+                    <td><a href='listaamigos.php?action=modificar&id={$amigo->id_amigo}'>Modificar</a></td>
                 </tr>";
+
                     }
 
                     echo "</table>";
