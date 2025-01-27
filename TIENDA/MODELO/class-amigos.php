@@ -148,36 +148,7 @@ class amigos
             return false;
         }
     }
-    public function listarColegas($nom)
-    {
-        if (strcmp($nom, "ADMIN") == 0) {
-            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario ";
-        } else {
-            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario and usuarios.nombre_usuario=? ";
-        }
-        $consulta = $this->db->getCon()->prepare($sent);
-        if (strcmp($nom, "ADMIN") != 0) {
-            $consulta->bind_param("s", $nom);
-        }
-        $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha);
-        $consulta->execute();
-        $amigos = [];
-
-        while ($consulta->fetch()) {
-            $amigo = new amigos();
-            $amigo->id_amigo = $id_amigo;
-            $amigo->id_usuario = $id_usuario;
-            $amigo->nombre = $nombre;
-            $amigo->apellido = $apellido;
-            $timestamp = strtotime($fecha);
-            $fecha = date("d/m/Y", $timestamp);
-            $amigo->fecha = $fecha;
-            $amigos[] = $amigo;
-        }
-
-        $consulta->close();
-        return $amigos;
-    }
+   
 
 }
 

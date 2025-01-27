@@ -1,0 +1,85 @@
+<?php
+require_once("class-conexion.php");
+class juegos
+{
+    private $db;
+    private $id_juego;
+    private $id_usuario;
+    private $titulo;
+    private $plataforma;
+    private $anio_lanzamiento;
+    private $foto;
+    public function __construct()
+    {
+        $this->db = new con();
+        $this->id_juego = -1;
+        $this->id_usuario = -1;
+        $this->titulo = "";
+        $this->plataforma = "";
+        $this->anio_lanzamiento = "";
+        $this->foto = "";
+    }
+
+    public function __get($nom)
+    {
+        return $this->$nom;
+    }
+
+    public function listarJuegos($nom)
+    {
+        $sent = "SELECT juegos.id_juego,juegos.id_usuario,juegos.titulo,juegos.plataforma,anio_lanzamiento,juegos.foto FROM usuarios,juegos WHERE usuarios.id_usuario=juegos.id_usuario and usuarios.nombre_usuario=?";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("s", $nom);
+        $consulta->bind_result($id_juego, $id_usuario, $titulo, $plataforma, $anio_lanzamiento, $foto);
+        $consulta->execute();
+        $juegos = [];
+
+        while ($consulta->fetch()) {
+            $juego = new juegos();
+            $juego->id_juego = $id_juego;
+            $juego->id_usuario = $id_usuario;
+            $juego->titulo = $titulo;
+            $juego->plataforma = $plataforma;
+            $timestamp = strtotime($anio_lanzamiento);
+            $anio_lanzamiento = date("d/m/Y", $timestamp);
+            $juego->anio_lanzamiento = $anio_lanzamiento;
+            $juego->foto = $foto;
+            $juegos[] = $juego;
+        }
+
+        $consulta->close();
+        return $juegos;
+    }
+    public function obtenerAmigo($id_juego,$id_usuario) {
+       $sent = "SELECT juegos.id_juego,juegos.id_usuario,juegos.titulo,juegos.plataforma,anio_lanzamiento,juegos.foto FROM usuarios,juegos WHERE usuarios.id_usuario=juegos.id_usuario and juegos.id_juego=? and usuarios.id_usuario=?";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("ii",$id_juego,$id_usuario);
+        $consulta->bind_result($id_juego, $id_usuario, $titulo, $plataforma,$anio_lanzamiento,$foto);
+        $consulta->execute();
+        $consulta->fetch();
+    
+        $juegos = new juegos();
+        $juegos->id_juego = $id_juego;
+        $juegos->id_usuario = $id_usuario;
+        $juegos->titulo = $titulo;
+        $juegos->plataforma = $plataforma;
+        $juegos->anio_lanzamiento = date("d/m/Y", strtotime($anio_lanzamiento));
+        $juegos->foto = $foto;
+        return $juegos;
+    }
+    public function modificarJuego($id_juego, $titulo, $plataforma, $anio_lanzamiento,$foto) {
+        try {
+            $sent = "UPDATE juegos SET titulo = ?, plataforma = ? ,anio_lanzamiento=? ,foto=? WHERE id_juego = ?";
+            $consulta = $this->db->getCon()->prepare($sent);
+            $consulta->bind_param("ssssi", $titulo, $plataforma, $anio_lanzamiento,$foto,$id_juego);
+            if ($consulta->execute()) {
+                return true; 
+            } else {
+                return false; 
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+}

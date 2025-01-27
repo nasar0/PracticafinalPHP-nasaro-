@@ -6,6 +6,7 @@
         $amigos = new amigos();
         session_start();
         $user = $_SESSION['user'];
+        echo $user;
         $listaAmigos = $amigos->listarColegas($user);
         require_once("../VISTA/amigos.php");
     }
@@ -13,6 +14,7 @@
     function buscador(){
         require_once("../VISTA/buscador.php");
     }
+ 
     function insert(){
         $amigos = new amigos();
         session_start();
@@ -30,19 +32,13 @@
         $listaAmigos = $amigos->listarAmigosNombre($_POST["bucador"],$user);
         require_once("../VISTA/amigos.php");
     }
-
-    if (isset($_REQUEST['action'])) {
-        $action = $_REQUEST['action'];
-        $action();
-    } else {
-        mostrar();
-    }
     function modificar() {
         $amigos = new amigos();
         $id_amigo = $_GET['id']; 
         $amigo = $amigos->obtenerAmigo($id_amigo); 
         require_once("../VISTA/modificar_amigo.php"); 
     }
+    
     function actualizar() {
         $amigos = new amigos();
         $id_amigo = $_POST['id_amigo'];
@@ -59,7 +55,12 @@
         header("Location: listaamigos.php?action=mostrar");
         exit;
     }
-    function mostrarJuegos(){
-        
+  
+    
+    if (isset($_REQUEST['action'])) {
+        $action = $_REQUEST['action'];
+        $action();
+    } else {
+        mostrar();
     }
 ?>

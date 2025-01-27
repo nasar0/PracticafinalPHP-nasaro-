@@ -20,6 +20,8 @@
         }
         if ($validacion) {
             header("Location: listaamigos.php");
+        }else{
+            header("Location: login.php");
         }
     }
 

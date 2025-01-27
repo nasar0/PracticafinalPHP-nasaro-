@@ -15,7 +15,7 @@
             <div class="col-4"><SPAn>AGENDA</SPAn>PERSONAL</div>
             <div class="col-6 ofset-2">
                 <a href="listaamigos.php?action=mostrar" class="text-uppercase">amigos</a>
-                <a href="listaamigos.php?action=mostrarJuegos" class="text-uppercase">juegos</a>
+                <a href="listajuegos.php?action=mostrarJuegos" class="text-uppercase">juegos</a>
                 <a href="listaamigos.php?action=mostrarPrestamos" class="text-uppercase">prestamos</a>
                 <a href="" class="text-uppercase">salir</a>
             </div>
@@ -27,39 +27,44 @@
             <div class="row d-flex ">
                 <div class="col-12 d-flex justify-content-end ">
                     <a href="listaamigos.php?action=insertarAmigos" class="text-uppercase ">Insertar amigos</a>
-                    <a href= "listaamigos.php?action=buscador"   class="text-uppercase ps-3">Buscar amigos</a>
+                    <a href="listaamigos.php?action=buscador" class="text-uppercase ps-3">Buscar amigos</a>
                 </div>
             </div>
         </section>
         <section class="container">
-            <div class="row d-flex ">
-                <div class="col-9 m-auto">
-                    <?php
-
-                    echo "<table border='1'>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Fecha de Nacimiento</th>
-                </tr>";
-
-                    foreach ($listaAmigos as $amigo) {
-
-
-                        echo "<tr>
-                    <td>{$amigo->nombre}</td>
-                    <td>{$amigo->apellido}</td>
-                    <td>{$amigo->fecha}</td>
-                    <td><a href='listaamigos.php?action=modificar&id={$amigo->id_amigo}'>Modificar</a></td>
-                </tr>";
-
-                    }
-
-                    echo "</table>";
-                    ?>
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <h2 class="text-center mb-4">Lista de Amigos</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Fecha de Nacimiento</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($listaAmigos as $amigo) {
+                            echo "
+                            <tr class='text-center align-middle'>
+                                <td class='align-middle'>{$amigo->nombre}</td>
+                                <td class='align-middle'>{$amigo->apellido}</td>
+                                <td class='align-middle'>{$amigo->fecha}</td>
+                                <td class='align-middle'>
+                                    <a href='listaamigos.php?action=modificar&id={$amigo->id_amigo}' class='btn btn-warning btn-sm'>Modificar</a>
+                                </td>
+                            </tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
     </main>
 
 
