@@ -26,8 +26,8 @@
         <section class="container">
             <div class="row d-flex ">
                 <div class="col-12 d-flex justify-content-end ">
-                    <a href="listaamigos.php?action=insertarAmigos" class="text-uppercase ">Insertar amigos</a>
-                    <a href="listaamigos.php?action=buscador" class="text-uppercase ps-3">Buscar amigos</a>
+                    <a href="listaamigos.php?action=insertarAmigos" class="text-uppercase ">Insertar juegos</a>
+                    <a href="listajuegos.php?action=buscador" class="text-uppercase ps-3">Buscar juegos</a>
                 </div>
             </div>
         </section>
@@ -48,11 +48,12 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($listaJuegos as $juego) {
+                        foreach ($listaJuego as $juego) {
+                            $user = $_SESSION['user'];
                             echo "
                             <tr class='text-center align-middle'>
                                 <td>
-                                    <img src='../img/{$juego->foto}' alt='{$juego->titulo}' class='img-fluid' style='max-width: 200px; height: auto;'>
+                                    <img src='../img/$user/{$juego->foto}' alt='{$juego->titulo}' class='img-fluid' style='max-width: 200px; height: auto;'>
                                 </td>
                                 <td class='align-middle'>{$juego->titulo}</td>
                                 <td class='align-middle'>{$juego->plataforma}</td>

@@ -40,8 +40,6 @@ class juegos
             $juego->id_usuario = $id_usuario;
             $juego->titulo = $titulo;
             $juego->plataforma = $plataforma;
-            $timestamp = strtotime($anio_lanzamiento);
-            $anio_lanzamiento = date("d/m/Y", $timestamp);
             $juego->anio_lanzamiento = $anio_lanzamiento;
             $juego->foto = $foto;
             $juegos[] = $juego;
@@ -63,15 +61,19 @@ class juegos
         $juegos->id_usuario = $id_usuario;
         $juegos->titulo = $titulo;
         $juegos->plataforma = $plataforma;
-        $juegos->anio_lanzamiento = date("d/m/Y", strtotime($anio_lanzamiento));
+        $juegos->anio_lanzamiento=$anio_lanzamiento;
         $juegos->foto = $foto;
         return $juegos;
     }
     public function modificarJuego($id_juego, $titulo, $plataforma, $anio_lanzamiento,$foto) {
         try {
-            $sent = "UPDATE juegos SET titulo = ?, plataforma = ? ,anio_lanzamiento=? ,foto=? WHERE id_juego = ?";
+            $sent = "UPDATE juegos SET titulo = ?, plataforma = ? ,anio_lanzamiento=? ";
+            if($foto!=null)$sent.=",foto=? ";
+            $sent.="WHERE id_juego = ?";
             $consulta = $this->db->getCon()->prepare($sent);
-            $consulta->bind_param("ssssi", $titulo, $plataforma, $anio_lanzamiento,$foto,$id_juego);
+
+            if($foto!=null) $consulta->bind_param("ssssi", $titulo, $plataforma, $anio_lanzamiento,$foto,$id_juego);
+            else $consulta->bind_param("sssi", $titulo, $plataforma, $anio_lanzamiento,$id_juego);
             if ($consulta->execute()) {
                 return true; 
             } else {
@@ -81,5 +83,28 @@ class juegos
             echo "Error: " . $e->getMessage();
             return false;
         }
+    }
+    public function listarJuegosNombre($string,$nom){
+        $regex = $string."%";
+        $sent= "SELECT j.id_juego,j.id_usuario,j.titulo,j.plataforma,j.anio_lanzamiento,j.foto FROM juegos j, usuarios WHERE usuarios.id_usuario = j.id_usuario AND j.titulo LIKE ? and usuarios.nombre_usuario=?";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("ss",$regex, $nom);
+        $consulta->bind_result($id_juego, $id_usuario, $titulo, $plataforma,$anio_lanzamiento,$foto);
+        $consulta->execute();
+        $juegos = [];
+
+        while ($consulta->fetch()) {
+            $juego = new juegos();
+            $juego->id_juego = $id_juego;
+            $juego->id_usuario = $id_usuario;
+            $juego->titulo = $titulo;
+            $juego->plataforma = $plataforma;
+            $juego->anio_lanzamiento = $anio_lanzamiento;
+            $juego->foto = $foto;
+            $juegos[] = $juego;
+        }
+
+        $consulta->close();
+        return $juegos;
     }
 }

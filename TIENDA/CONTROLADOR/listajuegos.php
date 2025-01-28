@@ -6,7 +6,7 @@
         session_start();
         $user = $_SESSION['user'];
         echo $user;
-        $listaJuegos = $juegos->listarJuegos($user);
+        $listaJuego = $juegos->listarJuegos($user);
         require_once("../VISTA/juegos.php");
     }
     function modificarJuego() {
@@ -22,8 +22,30 @@
         $titulo = $_POST['titulo'];
         $plataforma = $_POST['plataforma'];
         $anio_lanzamiento = $_POST['anio_lanzamiento'];
-        $foto=$_POST['foto'];
-    
+        $id_juego = $_GET['id'];
+        
+        session_start();
+        $user = $_SESSION['user'];
+        $ruta = "../img/".$user."/"; 
+
+        if (!is_dir($ruta)) mkdir($ruta);
+
+        if (isset($_FILES['foto'])) {
+            $foto=$_FILES['foto']['name'];
+            $ruta_temporal = $_FILES['foto']['tmp_name'];
+            $ruta_destino = $ruta.$foto;
+
+            if (move_uploaded_file($ruta_temporal, $ruta_destino)) {
+                echo "La imagen se ha subido correctamente y se ha guardado en: " . $ruta_destino;
+            } else {
+                echo "Hubo un error al mover el archivo a la carpeta de destino.";
+            }
+            unlink($ruta.$foto);
+        }else{
+            $foto=null;
+        }
+        
+            
         if ($juegos->modificarJuego($id_juego, $titulo, $plataforma, $anio_lanzamiento,$foto)) {
             echo "Amigo actualizado correctamente.";
         } else {
@@ -37,6 +59,16 @@
         $action = $_REQUEST['action'];
         $action();
     } else {
-        mostrar();
+        mostrarJuegos();
+    }
+    function buscador(){
+        require_once("../VISTA/buscadorJuegos.php");
+    }
+    function buscar() {
+        $juego = new juegos();
+        session_start();
+        $user = $_SESSION['user'];
+        $listaJuego = $juego->listarJuegosNombre($_POST["bucador"],$user);
+        require_once("../VISTA/juegos.php");
     }
 ?>

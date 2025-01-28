@@ -42,17 +42,10 @@
             <input type="number" class="form-control" id="anio_lanzamiento" name="anio_lanzamiento" value="<?php echo $juego->anio_lanzamiento; ?>" required>
         </div>
 
-        <!-- Campo: Foto (Imagen) -->
         <div class="mb-3">
             <label for="foto" class="form-label">Portada del Juego:</label>
             <input type="file" class="form-control" id="foto" name="foto">
             <small class="form-text text-muted">Sube una nueva imagen si deseas cambiar la portada.</small>
-            <!-- Mostrar la imagen actual si existe -->
-            <?php if (!empty($juego->foto)): ?>
-                <div class="mt-2">
-                    <img src="../img/<?php echo $juego->foto; ?>" alt="Portada actual" class="img-thumbnail" style="max-width: 200px;">
-                </div>
-            <?php endif; ?>
         </div>
 
         <!-- Botón de Actualización -->
