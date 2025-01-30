@@ -85,8 +85,7 @@ class amigos
         $consulta->close();
         return $amigos;
     }
-    public function obtenerIDuser($string){
-        $num=0;
+    public function obtenerIDuser(String $user){
         $sent = "SELECT id_usuario FROM usuarios WHERE nombre_usuario = ?";
         $consulta = $this->db->getCon()->prepare($sent);
         $consulta->bind_param("s",$user);
@@ -96,20 +95,24 @@ class amigos
 
         return $num;
     }
+
     public function insertarAmigos($nom, $ape, $fec,$user) {
         echo $fec;
         $usu=new amigos();
-        $usu->obtenerIDuser($user);
+        $idUsu=$usu->obtenerIDuser($user);
+        echo $idUsu.$user;
         try {
             $sent = "INSERT INTO amigos (id_usuario,nombre,apellido,fecha_nacimiento) VALUES (?,?,?,?)";
             $consulta = $this->db->getCon()->prepare($sent);
     
-            $consulta->bind_param("isss",$usu,$nom,$ape,$fec);
+            $consulta->bind_param("isss",$idUsu,$nom,$ape,$fec);
     
             if ($consulta->execute()) {
                 echo "Amigo insertado correctamente.";
+                header("Location: ../CONTROLADOR/listaamigos.php");
             } else {
                 echo "Error al insertar el amigo.";
+                header("Location: ../CONTROLADOR/listaamigos.php");
             }
         } catch (Exception $e) {
             echo "No se puede insertar: " . $e->getMessage();

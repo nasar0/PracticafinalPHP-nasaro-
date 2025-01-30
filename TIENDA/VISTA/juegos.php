@@ -12,11 +12,11 @@
 <body>
     <header class="container m-auto">
         <nav class="row d-flex ">
-            <div class="col-4"><SPAn>AGENDA</SPAn>PERSONAL</div>
+        <div class="col-4"><span class="fw-bold">AGENDA</span>PERSONAL</div>
             <div class="col-6 ofset-2">
                 <a href="listaamigos.php?action=mostrar" class="text-uppercase">amigos</a>
                 <a href="listaJuegos.php?action=mostrarJuegos" class="text-uppercase">juegos</a>
-                <a href="listaamigos.php?action=mostrarPrestamos" class="text-uppercase">prestamos</a>
+                <a href="listaprestamos.php?action=mostrarPrestamos" class="text-uppercase">prestamos</a>
                 <a href="" class="text-uppercase">salir</a>
             </div>
         </nav>
@@ -26,7 +26,7 @@
         <section class="container">
             <div class="row d-flex ">
                 <div class="col-12 d-flex justify-content-end ">
-                    <a href="listaamigos.php?action=insertarAmigos" class="text-uppercase ">Insertar juegos</a>
+                    <a href="listajuegos.php?action=insertarJuego" class="text-uppercase ">Insertar juegos</a>
                     <a href="listajuegos.php?action=buscador" class="text-uppercase ps-3">Buscar juegos</a>
                 </div>
             </div>

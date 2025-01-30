@@ -12,7 +12,7 @@
 <body>
     <header class="container m-auto">
         <nav class="row d-flex ">
-            <div class="col-4"><SPAn>AGENDA</SPAn>PERSONAL</div>
+        <div class="col-4"><span class="fw-bold">AGENDA</span>PERSONAL</div>
             <div class="col-6 ofset-2">
                 <a href="listaamigos.php?action=mostrar" class="text-uppercase">amigos</a>
                 <a href="listajuegos.php?action=mostrarJuegos" class="text-uppercase">juegos</a>

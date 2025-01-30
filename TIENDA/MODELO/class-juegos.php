@@ -107,4 +107,33 @@ class juegos
         $consulta->close();
         return $juegos;
     }
+    public function obtenerfoto($id){
+        $sent= " SELECT foto FROM juegos WHERE id_juego = ?";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("i",$id);
+        $consulta->bind_result($foto);
+        $consulta->execute();
+        $consulta->fetch();
+        return $foto;
+    }
+    public function insertarJuegos($user,$tit,$pla,$ani,$fot){
+        require_once('class-amigos.php');
+        $usu=new amigos();
+        $usue=$usu->obtenerIDuser($user);
+        
+        try {
+            $sent = "INSERT INTO juegos (id_usuario,titulo,plataforma,anio_lanzamiento,foto) VALUES (?,?,?,?,?)";
+            $consulta = $this->db->getCon()->prepare($sent);
+    
+            $consulta->bind_param("issss",$usue,$tit,$pla,$ani,$fot);
+    
+            if ($consulta->execute()) {
+                echo "Juego insertado correctamente.";
+            } else {
+                echo "Error al insertar el amigo.";
+            }
+        } catch (Exception $e) {
+            echo "No se puede insertar: " . $e->getMessage();
+        }
+    }
 }
