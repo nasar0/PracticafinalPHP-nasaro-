@@ -16,7 +16,7 @@
             <div class="col-6 ofset-2">
                 <a href="listaamigos.php?action=mostrar" class="text-uppercase">amigos</a>
                 <a href="" class="text-uppercase">juegos</a>
-                <a href="" class="text-uppercase">prestamos</a>
+                <a href="listaprestamos.php?action=mostrarPrestamos" class="text-uppercase">prestamos</a>
                 <a href="" class="text-uppercase">salir</a>
             </div>
         </nav>
