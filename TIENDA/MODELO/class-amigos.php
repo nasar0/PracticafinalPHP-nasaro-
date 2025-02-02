@@ -150,6 +150,27 @@ class amigos
             echo "Error: " . $e->getMessage();
             return false;
         }
+    } 
+    public function selectPrestamoAmigos($user){
+        $sent ="SELECT amigos.id_amigo ,amigos.nombre FROM amigos , usuarios WHERE usuarios.id_usuario = amigos.id_usuario and usuarios.nombre_usuario=?";
+        $consulta = $this->db->getCon()->prepare($sent);
+
+        $consulta->bind_param("s", $user);
+
+        $consulta->bind_result($id_amigo, $nombre);
+
+        $consulta->execute();
+
+        $amigos = []; 
+
+        while ($consulta->fetch()) {
+            $amigos[$id_amigo] = $nombre;  
+        }
+
+        $consulta->close();
+
+        return $amigos;  
+
     }
    
 

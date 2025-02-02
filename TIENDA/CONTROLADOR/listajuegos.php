@@ -5,7 +5,6 @@
         $juegos = new juegos();
         session_start();
         $user = $_SESSION['user'];
-        echo $user;
         $listaJuego = $juegos->listarJuegos($user);
         require_once("../VISTA/juegos.php");
     }

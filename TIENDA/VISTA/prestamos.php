@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Préstamos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
@@ -49,7 +51,7 @@
                             <tbody>
                                 <?php
                                 foreach ($listaPrestamos as $prestamo) {
-                                    $estadoDevuelto = ($prestamo->devuelto == 1) ? "No" : "Si";
+                                    $estadoDevuelto = ($prestamo->devuelto == 0) ? "Si" : "No";
                                     $user = $_SESSION['user'];
                                     echo "
                                         <tr class='text-center align-middle'>
@@ -60,7 +62,7 @@
                                             <td class='align-middle'>{$prestamo->fecha_prestamo}</td>
                                             <td class='align-middle'>{$estadoDevuelto}</td>
                                             <td class='align-middle'>
-                                                <a href='listaprestamos.php?action=devolver&id={$prestamo->id_prestamo}' class='btn btn-warning btn-sm'>Devolver</a>
+                                                <a href='listaprestamos.php?action=devolver&id={$prestamo->id_prestamo}' class='btn btn-warning btn-sm pixel-button'>Devolver</a>
                                             </td>
                                         </tr>";
                                 }

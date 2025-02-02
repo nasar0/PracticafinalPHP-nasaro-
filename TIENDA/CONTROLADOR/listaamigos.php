@@ -6,7 +6,6 @@
         $amigos = new amigos();
         session_start();
         $user = $_SESSION['user'];
-        echo $user;
         $listaAmigos = $amigos->listarColegas($user);
         require_once("../VISTA/amigos.php");
     }

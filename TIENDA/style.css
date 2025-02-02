@@ -1,0 +1,214 @@
+
+body {
+    background-image: url("img/fondo.jpeg");
+    background-size: cover;
+    font-family: 'Press Start 2P', cursive; 
+    color: #fff;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    color: #ffd700; /* Dorado para el título */
+    text-shadow: 2px 2px #000;
+}
+
+.main {
+    background-color: #8b8b8b; /* Fondo gris para el contenedor */
+    border: 3px solid #6b6b6b; /* Borde grueso */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0 #3b5a23; /* Sombra para efecto 3D */
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto; /* Centrar el main horizontalmente */
+}
+
+.login-container {
+    text-align: center;
+}
+
+.login-container h2 {
+    font-size: 1.5rem;
+    color: #ffd700; /* Dorado para el subtítulo */
+    text-shadow: 2px 2px #000;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.pixel-input {
+    background-color: #8b8b8b; /* Fondo gris para los inputs */
+    border: 3px solid #6b6b6b; /* Borde grueso */
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    padding: 10px;
+    width: 80%;
+    margin: auto;
+    box-shadow: 3px 3px 0 #3b5a23; /* Sombra para efecto 3D */
+    margin-bottom: 10px;
+}
+
+.pixel-input::placeholder {
+    color: #ccc; /* Color del placeholder */
+}
+
+.show-password,
+.remember-me {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #fff;
+    margin-top: 5px;
+}
+
+.show-password input,
+.remember-me input {
+    margin-right: 10px;
+}
+
+.pixel-button {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #4a752c; /* Verde similar a la hierba */
+    border: 3px solid #3b5a23; /* Borde más oscuro */
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0 #3b5a23; /* Sombra para efecto 3D */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pixel-button:hover {
+    background-color: #3b5a23; /* Verde más oscuro al hacer hover */
+    border-color: #2a3f1a;
+    color: #ffd700; /* Dorado al hacer hover */
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+header {
+    background-color: #4a752c; /* Verde similar a la hierba de Minecraft */
+    padding: 1rem 0;
+    border-bottom: 5px solid #3b5a23; /* Borde más oscuro */
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 0.8rem;
+}
+
+header nav a:hover {
+    color: #ffd700; /* Dorado para el hover */
+}
+
+.table-responsive {
+    margin-top: 2rem;
+    background-color: #8b8b8b; /* Fondo gris para la tabla */
+    border: 5px solid #6b6b6b; /* Borde grueso */
+    padding: 1rem;
+}
+
+.table thead {
+    background-color: #4a752c; /* Verde para el encabezado de la tabla */
+    color: #fff;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #6b6b6b; /* Fondo gris oscuro para el hover */
+}
+
+.btn-warning {
+    background-color: #ffd700; /* Dorado para los botones */
+    border-color: #ffd700;
+    color: #000;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.text-uppercase {
+    letter-spacing: 0.1em;
+}
+
+.justify-content-end a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+.justify-content-end a:hover {
+    color: #ffd700;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+h2 {
+    color: #ffd700; /* Dorado para los títulos */
+    text-shadow: 2px 2px #000; /* Sombra para efecto pixelado */
+}
+
+/* Efecto de bloques de Minecraft */
+.block-effect {
+    background-color: #8b8b8b;
+    border: 3px solid #6b6b6b;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    box-shadow: 5px 5px 0 #3b5a23; /* Sombra para efecto 3D */
+}
+
+/* Efecto de texto pixelado */
+.pixel-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    color: #fff;
+    text-shadow: 2px 2px #000;
+}
+
+/* Efecto de botón pixelado */
+.pixel-button {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #4a752c;
+    border: 3px solid #3b5a23;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0 #3b5a23;
+}
+
+.pixel-button:hover {
+    background-color: #3b5a23;
+    border-color: #2a3f1a;
+    color: #ffd700;
+}

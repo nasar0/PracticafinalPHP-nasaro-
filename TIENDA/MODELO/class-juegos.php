@@ -23,7 +23,7 @@ class juegos
     public function __get($nom)
     {
         return $this->$nom;
-    }
+    } 
 
     public function listarJuegos($nom)
     {
@@ -136,4 +136,25 @@ class juegos
             echo "No se puede insertar: " . $e->getMessage();
         }
     }
+    public function selectPrestamoJuegos($user){
+        $sent ="SELECT juegos.id_juego, juegos.titulo FROM juegos LEFT JOIN prestamos ON juegos.id_juego = prestamos.id_juego JOIN usuarios ON juegos.id_usuario = usuarios.id_usuario WHERE usuarios.nombre_usuario = ? AND (prestamos.devuelto = 0 OR prestamos.id_juego IS NULL);";
+        $consulta = $this->db->getCon()->prepare($sent);
+
+        $consulta->bind_param("s", $user);
+
+        $consulta->bind_result($id_juego, $titulo);
+
+        $consulta->execute();
+
+        $amigos = []; 
+
+        while ($consulta->fetch()) {
+            $amigos[$id_juego] = $titulo;  
+        }
+
+        $consulta->close();
+
+        return $amigos;  
+    }
 }
+
