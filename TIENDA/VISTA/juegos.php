@@ -4,37 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Agenda Personal - Minecraft Style</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
-    <header class="container m-auto">
-        <nav class="row d-flex ">
-        <div class="col-4"><span class="fw-bold">AGENDA</span>PERSONAL</div>
-            <div class="col-6 ofset-2">
-                <a href="listaamigos.php?action=mostrar" class="text-uppercase">amigos</a>
-                <a href="listaJuegos.php?action=mostrarJuegos" class="text-uppercase">juegos</a>
-                <a href="listaprestamos.php?action=mostrarPrestamos" class="text-uppercase">prestamos</a>
-                <a href="" class="text-uppercase">salir</a>
+    <header class="container-fluid">
+        <nav class="container d-flex justify-content-between align-items-center">
+            <div class="pixel-text">AGENDA PERSONAL</div>
+            <div>
+                <a href="listaamigos.php?action=mostrar" class="pixel-button">Amigos</a>
+                <a href="listajuegos.php?action=mostrarJuegos" class="pixel-button">Juegos</a>
+                <a href="listaprestamos.php?action=mostrarPrestamos" class="pixel-button">Préstamos</a>
+                <a href="../VISTA/index.php" class="pixel-button">Salir</a>
             </div>
         </nav>
-
     </header>
-    <main>
-        <section class="container">
-            <div class="row d-flex ">
-                <div class="col-12 d-flex justify-content-end ">
-                    <a href="listajuegos.php?action=insertarJuego" class="text-uppercase ">Insertar juegos</a>
-                    <a href="listajuegos.php?action=buscador" class="text-uppercase ps-3">Buscar juegos</a>
-                </div>
+    <main class="container mt-4">
+        <section class="mb-4">
+            <div class="d-flex justify-content-end">
+                <a href="listajuegos.php?action=insertarJuego" class="pixel-button">Insertar juegos</a>
+                <a href="listajuegos.php?action=buscador" class="pixel-button ms-3">Buscar juegos</a>
             </div>
         </section>
-        <section class="container">
-    <div class="row justify-content-center">
-        <div class="col-10">
+        <section>
+            <div class="row justify-content-center">
+            <div class="col-12">
             <h2 class="text-center mb-4">Lista de Juegos</h2>
             <div class="table-responsive block-effect">
                         <table class="table table-bordered table-striped table-hover">
@@ -68,7 +65,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> 
     </div>
 </section>
     </main>

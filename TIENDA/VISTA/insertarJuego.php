@@ -53,7 +53,7 @@
                         <input type="file" id="foto" name="foto" class="pixel-input form-control" accept="image/*" required>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" class="pixel-button">>Enviar</button>
                     </div>
                 </form>
             </div>

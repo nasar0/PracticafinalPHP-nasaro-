@@ -83,6 +83,7 @@ class juegos
             echo "Error: " . $e->getMessage();
             return false;
         }
+        header("Location: ../CONTROLADOR/listajuegos.php");
     }
     public function listarJuegosNombre($string,$nom){
         $regex = $string."%";
@@ -135,6 +136,7 @@ class juegos
         } catch (Exception $e) {
             echo "No se puede insertar: " . $e->getMessage();
         }
+        header("Location: ../CONTROLADOR/listajuegos.php");
     }
     public function selectPrestamoJuegos($user){
         $sent ="SELECT juegos.id_juego, juegos.titulo FROM juegos LEFT JOIN prestamos ON juegos.id_juego = prestamos.id_juego JOIN usuarios ON juegos.id_usuario = usuarios.id_usuario WHERE usuarios.nombre_usuario = ? AND (prestamos.devuelto = 0 OR prestamos.id_juego IS NULL);";

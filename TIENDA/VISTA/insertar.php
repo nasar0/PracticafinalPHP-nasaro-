@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="pixel-button">Agregar Amigo</button>
+                        <button type="submit" class="pixel-button">>Agregar Amigo</button>
                     </div>
                 </form>
             </div>

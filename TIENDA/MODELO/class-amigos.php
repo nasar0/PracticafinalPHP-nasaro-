@@ -117,6 +117,7 @@ class amigos
         } catch (Exception $e) {
             echo "No se puede insertar: " . $e->getMessage();
         }
+
     }
     public function obtenerAmigo($id_amigo) {
         $sent = "SELECT id_amigo, nombre, apellido, fecha_nacimiento FROM amigos WHERE id_amigo = ?";
@@ -150,6 +151,8 @@ class amigos
             echo "Error: " . $e->getMessage();
             return false;
         }
+        header("Location: ../VISTA/amigos.php");
+
     } 
     public function selectPrestamoAmigos($user){
         $sent ="SELECT amigos.id_amigo ,amigos.nombre FROM amigos , usuarios WHERE usuarios.id_usuario = amigos.id_usuario and usuarios.nombre_usuario=?";

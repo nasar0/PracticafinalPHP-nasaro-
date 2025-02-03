@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Amigo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Agenda Personal - Minecraft Style</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
-    <header class="container m-auto">
-        <nav class="row d-flex">
-        <div class="col-4"><span class="fw-bold">AGENDA</span>PERSONAL</div>
-            <div class="col-6 offset-2">
-                <a href="listaamigos.php?action=mostrar" class="text-uppercase">amigos</a>
-                <a href="" class="text-uppercase">juegos</a>
-                <a href="" class="text-uppercase">prestamos</a>
-                <a href="" class="text-uppercase">salir</a>
+    <header class="container-fluid">
+        <nav class="container d-flex justify-content-between align-items-center">
+            <div class="pixel-text">AGENDA PERSONAL</div>
+            <div>
+                <a href="listaamigos.php?action=mostrar" class="pixel-button">Amigos</a>
+                <a href="listajuegos.php?action=mostrarJuegos" class="pixel-button">Juegos</a>
+                <a href="listaprestamos.php?action=mostrarPrestamos" class="pixel-button">Préstamos</a>
+                <a href="../VISTA/index.php" class="pixel-button">Salir</a>
             </div>
         </nav>
     </header>
-    <main>
-    <section class="container">
-    <h1 class="text-center mb-4">Modificar Juego</h1>
-    <form action="listajuegos.php?action=actualizar" method="POST" enctype="multipart/form-data">
+    <main class="container mt-4">
+        <section class="mb-4">
+            <div class="d-flex justify-content-end">
+                <a href="listajuegos.php?action=insertarJuego" class="pixel-button">Insertar juegos</a>
+                <a href="listajuegos.php?action=buscador" class="pixel-button ms-3">Buscar juegos</a>
+            </div>
+        </section>
+    <section class="container mt-4">
+    <h1 class="text-center pixel-text mb-4">Modificar Juego</h1>
+    <form action="listajuegos.php?action=actualizar" method="POST" enctype="multipart/form-data" class="block-effect p-4">
         <input type="hidden" name="id_juego" value="<?php echo $juego->id_juego; ?>">
         
-        <!-- Campo: Título -->
         <div class="mb-3">
-            <label for="titulo" class="form-label">Título:</label>
-            <input type="text" class="form-control" id="titulo" name="titulo" value="<?php echo $juego->titulo; ?>" required>
-        </div>
-
-        <!-- Campo: Plataforma -->
-        <div class="mb-3">
-            <label for="plataforma" class="form-label">Plataforma:</label>
-            <input type="text" class="form-control" id="plataforma" name="plataforma" value="<?php echo $juego->plataforma; ?>" required>
-        </div>
-
-        <!-- Campo: Año de Lanzamiento -->
-        <div class="mb-3">
-            <label for="anio_lanzamiento" class="form-label">Año de Lanzamiento:</label>
-            <input type="number" class="form-control" id="anio_lanzamiento" name="anio_lanzamiento" value="<?php echo $juego->anio_lanzamiento; ?>" required>
+            <label for="titulo"  class="form-label pixel-text">Título:</label>
+            <input type="text" class="pixel-input form-control" id="titulo" name="titulo" value="<?php echo $juego->titulo; ?>" required>
         </div>
 
         <div class="mb-3">
-            <label for="foto" class="form-label">Portada del Juego:</label>
-            <input type="file" class="form-control" id="foto" name="foto">
+            <label for="plataforma"  class="form-label pixel-text">Plataforma:</label>
+            <input type="text" class="pixel-input form-control" id="plataforma" name="plataforma" value="<?php echo $juego->plataforma; ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="anio_lanzamiento"  class="form-label pixel-text">Año de Lanzamiento:</label>
+            <input type="number" class="pixel-input form-control" id="anio_lanzamiento" name="anio_lanzamiento" value="<?php echo $juego->anio_lanzamiento; ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="foto"  class="form-label pixel-text">Portada del Juego:</label>
+            <input type="file" class="pixel-input form-control" id="foto" name="foto">
             <small class="form-text text-muted">Sube una nueva imagen si deseas cambiar la portada.</small>
         </div>
 
-        <!-- Botón de Actualización -->
         <div class="text-center">
             <button type="submit" class="btn btn-primary">Actualizar</button>
         </div>

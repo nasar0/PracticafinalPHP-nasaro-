@@ -111,32 +111,30 @@ class prestamos
         } catch (Exception $e) {
             echo "No se puede insertar: " . $e->getMessage();
         }
+        header("Location: ../CONTROLADOR/listaprestamos.php");
+
     }
     public function buscar($string,$user) {
         $regex = "%".$string."%";
-        $sent= "SELECT prestamos.* 
-                FROM prestamos
-                JOIN usuarios ON prestamos.id_usuario = usuarios.id_usuario
-                JOIN amigos ON prestamos.id_amigo = amigos.id_amigo
-                JOIN juegos ON prestamos.id_juego = juegos.id_juego
-                WHERE (amigos.nombre LIKE ? OR juegos.titulo LIKE ? ) and  usuarios.nombre_usuario=?";
+        $sent= "SELECT prestamos.id_prestamo,amigos.nombre,juegos.foto,prestamos.fecha_prestamo,prestamos.devuelto FROM prestamos JOIN usuarios ON prestamos.id_usuario = usuarios.id_usuario JOIN amigos ON prestamos.id_amigo = amigos.id_amigo JOIN juegos ON prestamos.id_juego = juegos.id_juego WHERE (amigos.nombre LIKE ? OR juegos.titulo LIKE ? ) and usuarios.nombre_usuario=?";
         $consulta = $this->db->getCon()->prepare($sent);
 
         $consulta->bind_param("ssi", $regex,$regex,$user);  
 
-        $consulta->bind_result($id_prestamo, $id_amigo, $id_juego, $fecha, $devuelto,$id_usuario);
+        $consulta->bind_result($id_prestamo, $nombreAmigo, $foto, $fecha, $devuelto);
         
         $consulta->execute();
         
         $prestamos = [];
 
         while ($consulta->fetch()) {
-            $prestamo = new prestamos();  
+            $prestamo = new stdClass();
             $prestamo->id_prestamo = $id_prestamo;
-            $prestamo->id_amigo = $id_amigo;
-            $prestamo->id_juego = $id_juego; 
-            $prestamo->fecha = $fecha;
+            $prestamo->nombreAmigo= $nombreAmigo;
+            $prestamo->foto = $foto;
+            $prestamo->fecha_prestamo = date("d/m/Y", strtotime($fecha));
             $prestamo->devuelto = $devuelto;
+
             $prestamos[] = $prestamo;  
         }
         
@@ -144,25 +142,13 @@ class prestamos
         return $prestamos;
        
     }
-    public function devolver($amigo,$juego,$fecha){
-        require_once('class-amigos.php');
-        $usu=new amigos();
-        $usue=$usu->obtenerIDuser($user);
-        
-        try {
-            $sent = "INSERT INTO prestamos (id_amigo,id_juego,fecha_prestamo,devuelto) VALUES (?,?,?,?)";
-            $consulta = $this->db->getCon()->prepare($sent);
-    
-            $consulta->bind_param("iisi",$amigo,$juego,$fecha,1);
-    
-            if ($consulta->execute()) {
-                echo "Prestamo devuelto correctamente.";
-            } else {
-                echo "Error al devolver el prestamo.";
-            }
-        } catch (Exception $e) {
-            echo "No se puede insertar: " . $e->getMessage();
-        }
+    public function devolver($id_prestamo){
+        $sent ="UPDATE prestamos SET devuelto = 0 WHERE id_prestamo = ?";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("i", $id_prestamo);  
+        $consulta->execute();
+        $consulta->close();
+        header("Location: ../CONTROLADOR/listaprestamos.php");
     }
     
 }

@@ -9,8 +9,8 @@
         $listaPrestamos=$prestamo->mostrar($user);
         require_once("../VISTA/prestamos.php");
     }
-    function  insertarPrestamo(){
-        session_start();
+    function  insertarPrestamo(){ 
+        session_start(); 
         $user = $_SESSION['user'];
         $jue = new juegos();
         $ami = new amigos();
@@ -35,6 +35,11 @@
         $user = $_SESSION['user'];
         $listaPrestamos = $prestamo->buscar($_POST["bucador"], $user);
         require_once("../VISTA/prestamos.php");
+    }
+    function devolver(){
+        $prestamo = new prestamos();
+        $id_prestamo = $_GET['id'];
+        $prestamo->devolver($id_prestamo);
     }
     if (isset($_REQUEST['action'])) {
         $action = $_REQUEST['action'];
