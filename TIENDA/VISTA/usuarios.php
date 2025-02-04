@@ -38,36 +38,34 @@
         <section class="mb-4">
             <div class="d-flex justify-content-end">
                 <a href="listaamigos.php?action=insertarAmigos" class="pixel-button">Insertar amigos</a>
-                <a href="listaamigos.php?action=buscador" class="pixel-button ms-3">Buscar amigos</a>
+                <a href="listaamigos.php?action=buscadorUsuarios" class="pixel-button ms-3">Buscar amigos</a>
             </div>
         </section>
         <section>
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <h2 class="text-center mb-4">Lista de Amigos</h2>
+                    <h2 class="text-center mb-4">Lista de Usuarios</h2>
                     <div class="table-responsive block-effect">
                         <table class="table table-bordered table-striped table-hover">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">Apellido</th>
-                                    <th scope="col">Fecha de Nacimiento</th>
-                                    <?php if (strcmp($user, "ADMIN") == 0) echo "<th scope='col'> Nombre Usuario </th>" ?>
+                                    <th scope="col">contraseña</th>
                                     <th scope="col">Acciones</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                foreach ($listaAmigos as $amigo) {
+                                foreach ($listausuarios as $usuarios) {
                                     echo "
                                     <tr class='text-center align-middle'>
-                                        <td class='align-middle'>{$amigo->nombre}</td>
-                                        <td class='align-middle'>{$amigo->apellido}</td>
-                                        <td class='align-middle'>{$amigo->fecha}</td>";
-                                    if (strcmp($user, "ADMIN") == 0) echo "<td class='align-middle'>{$amigo->usuNom}</td>";
-                                    echo "<td class='align-middle'>
-                                            <a href='listaamigos.php?action=modificar&id={$amigo->id_amigo}' class='btn btn-warning btn-sm pixel-button'>Modificar</a>
+                                        <td class='align-middle'>{$usuarios->id_usuarios}</td>
+                                        <td class='align-middle'>{$usuarios->nombre_usuario}</td>
+                                        <td class='align-middle'>".str_repeat('*', strlen($usuarios->contraseña))."</td>
+                                    <td class='align-middle'>
+                                            <a href='listaamigos.php?action=modificar&id={$usuarios->id_usuarios}' class='btn btn-warning btn-sm pixel-button'>Modificar</a>
                                         </td>
                                     </tr>";
                                 }

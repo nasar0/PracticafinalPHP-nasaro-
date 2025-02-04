@@ -20,20 +20,22 @@ class amigos
     public function listarColegas($nom)
     {
         if (strcmp($nom, "ADMIN") == 0) {
-            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario ";
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento,usuarios.nombre_usuario from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario;";
         } else {
             $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento from amigos , usuarios where usuarios.id_usuario=amigos.id_usuario and usuarios.nombre_usuario=? ";
         }
         $consulta = $this->db->getCon()->prepare($sent);
         if (strcmp($nom, "ADMIN") != 0) {
             $consulta->bind_param("s", $nom);
+            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha);
+        }else{
+            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha,$usuNom);
         }
-        $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha);
         $consulta->execute();
         $amigos = [];
 
         while ($consulta->fetch()) {
-            $amigo = new amigos();
+            $amigo = new stdClass();
             $amigo->id_amigo = $id_amigo;
             $amigo->id_usuario = $id_usuario;
             $amigo->nombre = $nombre;
@@ -41,6 +43,7 @@ class amigos
             $timestamp = strtotime($fecha);
             $fecha = date("d/m/Y", $timestamp);
             $amigo->fecha = $fecha;
+            if (strcmp($nom, "ADMIN") == 0) $amigo->usuNom = $usuNom;
             $amigos[] = $amigo;
         }
 
@@ -174,6 +177,24 @@ class amigos
 
         return $amigos;  
 
+    }
+    public function mostrarUsuarios(){
+        $sent = "SELECT usuarios.* FROM usuarios";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_result($id_usuarios,$nombre_usuario,$contraseña);
+        $consulta->execute();
+        $consulta->fetch();
+        $usuarios=[];
+        while ($consulta->fetch()) {
+            $usuario = new stdClass();
+            $usuario->id_usuarios = $id_usuarios;
+            $usuario->nombre_usuario = $nombre_usuario;
+            $usuario->contraseña = $contraseña;
+            $usuarios[] = $usuario;
+        }
+        
+    
+        return $usuarios;
     }
    
 

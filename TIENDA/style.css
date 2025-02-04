@@ -94,6 +94,7 @@ body {
 }
 
 .pixel-button:hover {
+    box-shadow: -3px -3px 0 #3b5a23;
     background-color: #3b5a23; /* Verde más oscuro al hacer hover */
     border-color: #2a3f1a;
     color: #ffd700; /* Dorado al hacer hover */

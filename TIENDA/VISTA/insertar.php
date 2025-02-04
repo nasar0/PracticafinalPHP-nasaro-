@@ -30,8 +30,8 @@
                 <a href="listaamigos.php?action=buscador" class="pixel-button">Buscar amigos</a>
             </div>
         </section>
-
-        <section class="row justify-content-center">
+        <?php if (strcmp($user, "ADMIN") != 0){
+            echo '<section class="row justify-content-center">
             <div class="col-md-8">
                 <h2 class="text-center mb-4 pixel-text">Formulario de Amigo</h2>
                 <form action="../CONTROLADOR/listaamigos.php?action=insert" method="post" class="block-effect p-4">
@@ -55,7 +55,12 @@
                     </div>
                 </form>
             </div>
-        </section>
+        </section>';
+        }else{
+            
+        }
+        ?>
+        
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
