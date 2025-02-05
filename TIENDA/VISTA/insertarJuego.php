@@ -12,17 +12,7 @@
 </head>
 
 <body>
-    <header class="container-fluid py-3">
-        <nav class="container d-flex justify-content-between align-items-center">
-            <div class="pixel-text fw-bold fs-4">AGENDA PERSONAL</div>
-            <div>
-                <a href="listaamigos.php?action=mostrar" class="pixel-button me-3">Amigos</a>
-                <a href="listaJuegos.php?action=mostrarJuegos" class="pixel-button me-3">Juegos</a>
-                <a href="listaprestamos.php?action=mostrarPrestamos" class="pixel-button me-3">Préstamos</a>
-                <a href="" class="pixel-button">Salir</a>
-            </div>
-        </nav>
-    </header>
+    <?php require_once("header.php") ?>
 
     <main class="container mt-4">
         <section class="row mb-4">

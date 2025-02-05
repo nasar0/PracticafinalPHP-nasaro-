@@ -21,9 +21,27 @@
         if ($validacion) {
             header("Location: listaamigos.php");
         }else{
-            header("Location: login.php");
+            header("Location: listausuarios.php");
         }
     }
+    function usuarios(){
+        session_start();
+        $user = $_SESSION['user'];
+        $amigos = new usuarios();
+        $listausuarios=$amigos->mostrarUsuarios();
+        require_once("../VISTA/usuarios.php");
+    }
+    function buscadorUsuarios(){
+        require_once("../VISTA/buscadorUsuarios.php");
+    }
+    function buscador(){
+        $usuarios = new usuarios();
+        session_start();
+        $user = $_SESSION['user'];
+        $listausuarios = $usuarios->listarUsuarios($_POST["bucador"]);
+        require_once("../VISTA/usuarios.php");
+    }
+
 
     if(isset($_REQUEST['action'])){
         $action = $_REQUEST['action'];

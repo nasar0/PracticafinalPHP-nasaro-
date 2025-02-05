@@ -16,7 +16,7 @@
     <main class="main">
         <div class="login-container block-effect">
             <h2 class="pixel-text">Iniciar sesión</h2>
-            <form action="../CONTROLADOR/login.php?action=inicio" method="POST" class="login-form">
+            <form action="../CONTROLADOR/listausuarios.php?action=inicio" method="POST" class="login-form">
                 <div class="form-group">
                     <input type="text" name="user" class="pixel-input" placeholder="Nombre de usuario" value="<?php if (isset($_COOKIE["user"])) echo $_COOKIE["user"]; ?>" required>
                 </div>

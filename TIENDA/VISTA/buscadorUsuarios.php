@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -14,9 +15,9 @@
 <?php require_once("header.php") ?>
     <main class="container mt-4">
         <section>
-            <form action="listajuegos.php?action=buscar" method="post" class="mb-4">
+            <form action="listausuarios.php?action=buscador" method="post" class="mb-4">
                 <div class="input-group">
-                    <input type="search" name="bucador" id="buscador" class="form-control pixel-input" placeholder="Buscar amigos...">
+                    <input type="search" name="bucador" id="buscador" class="form-control pixel-input" placeholder="Buscar usuarios...">
                     <button type="submit" class="btn pixel-button">Buscar</button>
                 </div>
             </form>

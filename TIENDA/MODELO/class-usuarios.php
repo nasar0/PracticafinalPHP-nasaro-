@@ -36,6 +36,44 @@
             $consulta->close(); 
             return $inicio;
         }
+        public function mostrarUsuarios(){
+            $sent = "SELECT usuarios.* FROM usuarios";
+            $consulta = $this->db->getCon()->prepare($sent);
+            $consulta->bind_result($id_usuarios,$nombre_usuario,$contraseña);
+            $consulta->execute();
+            $consulta->fetch();
+            $usuarios=[];
+            while ($consulta->fetch()) {
+                $usuario = new stdClass();
+                $usuario->id_usuarios = $id_usuarios;
+                $usuario->nombre_usuario = $nombre_usuario;
+                $usuario->contraseña = $contraseña;
+                $usuarios[] = $usuario;
+            }
+            
+        
+            return $usuarios;
+        }
+
+        public function listarUsuarios($string){
+            $regex = "%".$string."%";
+            $sent = "SELECT usuarios.* FROM usuarios WHERE usuarios.nombre_usuario like ?";
+            $consulta = $this->db->getCon()->prepare($sent);
+            $consulta->bind_result($id_usuarios,$nombre_usuario,$contraseña);
+            $consulta->bind_param("s", $regex);
+            $consulta->execute();
+            $usuarios=[];
+            while ($consulta->fetch()) {
+                $usuario = new stdClass();
+                $usuario->id_usuarios = $id_usuarios;
+                $usuario->nombre_usuario = $nombre_usuario;
+                $usuario->contraseña = $contraseña;
+                $usuarios[] = $usuario;
+            }
+            
+        
+            return $usuarios;
+        }
        
         
     }

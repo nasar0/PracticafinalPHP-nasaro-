@@ -178,24 +178,8 @@ class amigos
         return $amigos;  
 
     }
-    public function mostrarUsuarios(){
-        $sent = "SELECT usuarios.* FROM usuarios";
-        $consulta = $this->db->getCon()->prepare($sent);
-        $consulta->bind_result($id_usuarios,$nombre_usuario,$contraseña);
-        $consulta->execute();
-        $consulta->fetch();
-        $usuarios=[];
-        while ($consulta->fetch()) {
-            $usuario = new stdClass();
-            $usuario->id_usuarios = $id_usuarios;
-            $usuario->nombre_usuario = $nombre_usuario;
-            $usuario->contraseña = $contraseña;
-            $usuarios[] = $usuario;
-        }
-        
     
-        return $usuarios;
-    }
+    
    
 
 }

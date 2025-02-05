@@ -55,13 +55,7 @@
         exit;
     }
   
-    function usuarios(){
-        session_start();
-        $user = $_SESSION['user'];
-        $amigos = new amigos();
-        $listausuarios=$amigos->mostrarUsuarios();
-        require_once("../VISTA/usuarios.php");
-    }
+    
    
     if (isset($_REQUEST['action'])) {
         $action = $_REQUEST['action'];

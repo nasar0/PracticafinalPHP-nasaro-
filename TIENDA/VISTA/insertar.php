@@ -11,17 +11,7 @@
 </head>
 
 <body>
-    <header class="container-fluid py-3">
-        <nav class="container d-flex justify-content-between align-items-center">
-            <div class="pixel-text fw-bold fs-4">AGENDA PERSONAL</div>
-            <div>
-                <a href="listaamigos.php?action=mostrar" class="pixel-button me-3">Amigos</a>
-                <a href="listaJuegos.php?action=mostrarJuegos" class="pixel-button me-3">Juegos</a>
-                <a href="listaprestamos.php?action=mostrarPrestamos" class="pixel-button me-3">Préstamos</a>
-                <a href="" class="pixel-button">Salir</a>
-            </div>
-        </nav>
-    </header>
+    <?php require_once("header.php") ?>
 
     <main class="container mt-4">
         <section class="row mb-4">
@@ -30,8 +20,7 @@
                 <a href="listaamigos.php?action=buscador" class="pixel-button">Buscar amigos</a>
             </div>
         </section>
-        <?php if (strcmp($user, "ADMIN") != 0){
-            echo '<section class="row justify-content-center">
+        <section class="row justify-content-center">
             <div class="col-md-8">
                 <h2 class="text-center mb-4 pixel-text">Formulario de Amigo</h2>
                 <form action="../CONTROLADOR/listaamigos.php?action=insert" method="post" class="block-effect p-4">
@@ -56,10 +45,7 @@
                 </form>
             </div>
         </section>';
-        }else{
-            
-        }
-        ?>
+        
         
     </main>
 

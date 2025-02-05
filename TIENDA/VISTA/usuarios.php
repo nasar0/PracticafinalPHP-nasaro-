@@ -11,34 +11,12 @@
 </head>
 
 <body>
-    <header class="container-fluid">
-        <nav class="container d-flex justify-content-between align-items-center">
-            <div class="pixel-text">AGENDA PERSONAL</div>
-            <div>
-                <?php
-                    if (strcmp($user, "ADMIN") == 0) {
-                        echo '<a href="listaAmigos.php?action=mostrarPrestamos" class="pixel-button">Contactos</a>';
-                    } else {
-                        echo '<a href="listaamigos.php?action=mostrar" class="pixel-button">Amigos</a>';
-                    }
-                ?>
-                <a href="listajuegos.php?action=mostrarJuegos" class="pixel-button">Juegos</a>
-                <?php
-                if (strcmp($user, "ADMIN") == 0) {
-                    echo '<a href="listaAmigos.php?action=usuarios" class="pixel-button">Usuarios</a>';
-                } else {
-                    echo '<a href="listaprestamos.php?action=mostrarPrestamos" class="pixel-button">Préstamos</a>';
-                }
-                ?>
-                <a href="../VISTA/index.php" class="pixel-button">Salir</a>
-            </div>
-        </nav>
-    </header>
+    <?php require_once("header.php") ?>
     <main class="container mt-4">
         <section class="mb-4">
             <div class="d-flex justify-content-end">
-                <a href="listaamigos.php?action=insertarAmigos" class="pixel-button">Insertar amigos</a>
-                <a href="listaamigos.php?action=buscadorUsuarios" class="pixel-button ms-3">Buscar amigos</a>
+                <a href="listausuarios.php?action=insertarAmigos" class="pixel-button">Insertar usuarios</a>
+                <a href="listausuarios.php?action=buscadorUsuarios" class="pixel-button ms-3">Buscar usuarios</a>
             </div>
         </section>
         <section>
