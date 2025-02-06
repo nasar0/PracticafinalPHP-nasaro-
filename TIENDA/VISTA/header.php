@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['user']))  session_start(); $user = $_SESSION['user']; ?>
+<?php if (!isset($_SESSION['user']))  session_start(); $user = $_SESSION['user']; ?> 
 
 <header class="container-fluid">
         <nav class="container d-flex justify-content-between align-items-center">
@@ -11,7 +11,11 @@
                         echo '<a href="listaamigos.php?action=mostrar" class="pixel-button">Amigos</a>';
                     }
                 ?>
-                <a href="listajuegos.php?action=mostrarJuegos" class="pixel-button">Juegos</a>
+                <?php
+                    if (strcmp($user, "ADMIN") != 0) {
+                        echo '<a href="listajuegos.php?action=mostrarJuegos" class="pixel-button">Juegos</a>';
+                    } 
+                ?>
                 <?php
                 if (strcmp($user, "ADMIN") == 0) {
                     echo '<a href="listausuarios.php?action=usuarios" class="pixel-button">Usuarios</a>';

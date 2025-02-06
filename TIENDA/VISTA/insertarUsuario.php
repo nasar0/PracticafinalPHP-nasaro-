@@ -16,31 +16,31 @@
     <main class="container mt-4">
         <section class="row mb-4">
             <div class="col-12 text-end">
-                <a href="listaamigos.php?action=insertarAmigos" class="pixel-button me-3">Insertar amigos</a>
-                <a href="listaamigos.php?action=buscador" class="pixel-button">Buscar amigos</a>
+                <a href="listausuarios.php?action=insertarUsuario" class="pixel-button me-3">Insertar usuario</a>
+                <a href="listausuarios.php?action=buscador" class="pixel-button">Buscar usuarios</a>
             </div>
         </section>
         <section class="row justify-content-center">
             <div class="col-md-8">
-                <h2 class="text-center mb-4 pixel-text">Formulario de Amigo</h2>
-                <form action="../CONTROLADOR/listaamigos.php?action=insert" method="post" class="block-effect p-4">
+                <h2 class="text-center mb-4 pixel-text">Formulario de Usuario</h2>
+                <form action="../CONTROLADOR/listausuarios.php?action=insert" method="post" class="block-effect p-4">
                     <div class="mb-3">
-                        <label for="nombre" class="form-label pixel-text">Nombre de tu amigo:</label>
+                        <label for="nombre" class="form-label pixel-text">Nombre de usuario:</label>
                         <input type="text" id="nombre" name="nombre" class="pixel-input form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="apellido" class="form-label pixel-text">Apellido de tu amigo:</label>
-                        <input type="text" id="apellido" name="apellido" class="pixel-input form-control" required>
+                        <label for="apellido" class="form-label pixel-text">Contraseña: </label>
+                        <input type="password" id="pass" name="pass" class="pixel-input form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="fecha_nacimiento" class="form-label pixel-text">Fecha de nacimiento:</label>
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="pixel-input form-control" required>
+                        <label for="fecha_nacimiento" class="form-label pixel-text">Repite la Contraseña</label>
+                        <input type="password" id="passs" name="pass2" class="pixel-input form-control" required>
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="pixel-button">>Agregar Amigo</button>
+                        <button type="submit" class="pixel-button">>Agregar Usuario</button>
                     </div>
                 </form>
             </div>

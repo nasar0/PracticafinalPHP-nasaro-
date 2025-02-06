@@ -32,7 +32,7 @@ class amigos
             $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha,$usuNom);
         }
         $consulta->execute();
-        $amigos = [];
+        $amigos = []; 
 
         while ($consulta->fetch()) {
             $amigo = new stdClass();

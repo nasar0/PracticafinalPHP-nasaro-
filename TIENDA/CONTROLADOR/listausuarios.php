@@ -23,10 +23,8 @@
         }else{
             header("Location: listausuarios.php");
         }
-    }
+    } 
     function usuarios(){
-        session_start();
-        $user = $_SESSION['user'];
         $amigos = new usuarios();
         $listausuarios=$amigos->mostrarUsuarios();
         require_once("../VISTA/usuarios.php");
@@ -36,13 +34,32 @@
     }
     function buscador(){
         $usuarios = new usuarios();
-        session_start();
-        $user = $_SESSION['user'];
         $listausuarios = $usuarios->listarUsuarios($_POST["bucador"]);
         require_once("../VISTA/usuarios.php");
     }
+    function insertarUsuario(){
+        require_once("../VISTA/insertarUsuario.php");
+    }
+    function insert() {
+        $usuarios = new usuarios();
+        if (strcmp($_POST["pass"], $_POST["pass2"]) == 0)$usuarios->insertarAmigos($_POST["nombre"],$_POST["pass"]);
+    }
 
-
+    function modificar(){
+        $user = new usuarios();
+        $id_usu = $_GET['id']; 
+        $usu = $user->obtenerUsuario($id_usu); 
+        require_once("../VISTA/modificar_usuario.php");
+    }
+    function actualizar(){
+        $user = new usuarios();
+        if (strcmp($_POST["pass1"], "") == 0) {
+            $user->modificarUsuario($_POST["id_usuario"],$_POST["nombre"],$_POST["pass"]);  
+        }else{
+            $user->modificarUsuario($_POST["id_usuario"],$_POST["nombre"],$_POST["pass1"]);
+        }
+        header("Location: ../CONTROLADOR/listausuarios.php?action=usuarios");
+    }
     if(isset($_REQUEST['action'])){
         $action = $_REQUEST['action'];
         $action();
