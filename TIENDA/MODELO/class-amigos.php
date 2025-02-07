@@ -101,25 +101,37 @@ class amigos
 
     public function insertarAmigos($nom, $ape, $fec,$user) {
         echo $fec;
-        $usu=new amigos();
-        $idUsu=$usu->obtenerIDuser($user);
-        echo $idUsu.$user;
-        try {
-            $sent = "INSERT INTO amigos (id_usuario,nombre,apellido,fecha_nacimiento) VALUES (?,?,?,?)";
-            $consulta = $this->db->getCon()->prepare($sent);
-    
-            $consulta->bind_param("isss",$idUsu,$nom,$ape,$fec);
-    
-            if ($consulta->execute()) {
-                echo "Amigo insertado correctamente.";
-                header("Location: ../CONTROLADOR/listaamigos.php");
-            } else {
-                echo "Error al insertar el amigo.";
-                header("Location: ../CONTROLADOR/listaamigos.php");
-            }
-        } catch (Exception $e) {
-            echo "No se puede insertar: " . $e->getMessage();
+        $idUsu=0;
+        echo "<br>".$user."<br>";
+        if (is_string($user)) {
+            echo "hola";
+            $usu=new amigos();
+            $idUsu=$usu->obtenerIDuser($user);
+        }else{
+            $idUsu=$user;
         }
+        echo $idUsu;
+        if (time()<strtotime($fec)) {
+            // header("Location: ../CONTROLADOR/listaamigos.php");
+        }else{
+            try {
+                $sent = "INSERT INTO amigos (id_usuario,nombre,apellido,fecha_nacimiento) VALUES (?,?,?,?)";
+                $consulta = $this->db->getCon()->prepare($sent);
+        
+                $consulta->bind_param("isss",$idUsu,$nom,$ape,$fec);
+        
+                if ($consulta->execute()) {
+                    echo "Amigo insertado correctamente.";
+                    // header("Location: ../CONTROLADOR/listaamigos.php");
+                } else {
+                    echo "Error al insertar el amigo.";
+                    // header("Location: ../CONTROLADOR/listaamigos.php");
+                }
+            } catch (Exception $e) {
+                echo "No se puede insertar: " . $e->getMessage();
+            }
+        }
+        
 
     }
     public function obtenerAmigo($id_amigo) {
@@ -139,6 +151,7 @@ class amigos
         return $amigo;
     }
     public function modificarAmigo($id_amigo, $nombre, $apellido, $fecha_nacimiento) {
+        echo $id_amigo;
         try {
             $sent = "UPDATE amigos SET nombre = ?, apellido = ?, fecha_nacimiento = ? WHERE id_amigo = ?";
             $consulta = $this->db->getCon()->prepare($sent);
@@ -154,7 +167,7 @@ class amigos
             echo "Error: " . $e->getMessage();
             return false;
         }
-        header("Location: ../VISTA/amigos.php");
+        // header("Location: ../VISTA/amigos.php");
 
     } 
     public function selectPrestamoAmigos($user){

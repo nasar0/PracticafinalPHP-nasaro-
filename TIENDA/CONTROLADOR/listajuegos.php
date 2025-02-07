@@ -8,14 +8,6 @@
         $listaJuego = $juegos->listarJuegos($user);
         require_once("../VISTA/juegos.php");
     }
-    function modificarJuego()
-    {
-        $juegos = new juegos();
-        $id_juego = $_GET['id'];
-        $id_usuario = $_GET['id2'];
-        $juego = $juegos->obtenerAmigo($id_juego, $id_usuario);
-        require_once("../VISTA/modificar_juego.php");
-    }
     function actualizar()
     {
         $juegos = new juegos();
@@ -65,8 +57,6 @@
         require_once("../VISTA/buscadorJuegos.php");
     }
 
-
-
     function insert()
     {
         $juegos = new juegos();
@@ -84,8 +74,15 @@
             echo "Hubo un error al mover el archivo a la carpeta de destino.";
         }
     }
+
     function insertarJuego()
     {
+        if (isset($_GET['id'])) {
+            $juegos = new juegos();
+            $id_juego = $_GET['id'];
+            $id_usuario = $_GET['id2'];
+            $juego = $juegos->obtenerAmigo($id_juego, $id_usuario);
+        }
         require_once("../VISTA/insertarJuego.php");
     }
 

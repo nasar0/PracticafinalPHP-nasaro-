@@ -38,18 +38,16 @@
         require_once("../VISTA/usuarios.php");
     }
     function insertarUsuario(){
+        if (isset($_GET['id'])) {
+            $user = new usuarios();
+            $id_usu = $_GET['id']; 
+            $usu = $user->obtenerUsuario($id_usu); 
+        }
         require_once("../VISTA/insertarUsuario.php");
     }
     function insert() {
         $usuarios = new usuarios();
         if (strcmp($_POST["pass"], $_POST["pass2"]) == 0)$usuarios->insertarAmigos($_POST["nombre"],$_POST["pass"]);
-    }
-
-    function modificar(){
-        $user = new usuarios();
-        $id_usu = $_GET['id']; 
-        $usu = $user->obtenerUsuario($id_usu); 
-        require_once("../VISTA/modificar_usuario.php");
     }
     function actualizar(){
         $user = new usuarios();
@@ -60,6 +58,7 @@
         }
         header("Location: ../CONTROLADOR/listausuarios.php?action=usuarios");
     }
+    
     if(isset($_REQUEST['action'])){
         $action = $_REQUEST['action'];
         $action();

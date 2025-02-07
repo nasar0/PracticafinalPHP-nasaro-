@@ -47,7 +47,7 @@
                                 <td class='align-middle'>{$juego->plataforma}</td>
                                 <td class='align-middle'>{$juego->anio_lanzamiento}</td>
                                 <td class='align-middle'>
-                                    <a href='listajuegos.php?action=modificarJuego&id={$juego->id_juego}&id2={$juego->id_usuario}' class='btn btn-warning btn-sm pixel-button'>Modificar</a>
+                                    <a href='listajuegos.php?action=insertarJuego&id={$juego->id_juego}&id2={$juego->id_usuario}' class='btn btn-warning btn-sm pixel-button'>Modificar</a>
                                 </td>
                             </tr>";
                         }

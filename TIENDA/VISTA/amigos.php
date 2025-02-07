@@ -45,7 +45,7 @@
                                         <td class='align-middle'>{$amigo->fecha}</td>";
                                     if (strcmp($user, "ADMIN") == 0) echo "<td class='align-middle'>{$amigo->usuNom}</td>";
                                     echo "<td class='align-middle'>
-                                            <a href='listaamigos.php?action=modificar&id={$amigo->id_amigo}' class='btn btn-warning btn-sm pixel-button'>Modificar</a>
+                                            <a href='listaamigos.php?action=insertarAmigos&id={$amigo->id_amigo}' class='btn btn-warning btn-sm pixel-button'>Modificar</a>
                                         </td>
                                     </tr>";
                                 }

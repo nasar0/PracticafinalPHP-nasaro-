@@ -16,11 +16,28 @@
  
     function insert(){
         $amigos = new amigos();
-        session_start();
-        $user = $_SESSION['user'];
+        $user=0;
+        echo "<br>".$_POST['idUser']."<br>";
+        if (isset($_POST['idUser'])) {
+            $user = $_POST['idUser'];
+            $user=intval($user)
+        }else{
+            session_start();
+            $user = $_SESSION['user'];
+        }
+        echo "<br>".$user."<br>";
         $amigos->insertarAmigos($_POST["nombre"],$_POST["apellido"],$_POST["fecha_nacimiento"],$user);
     }
     function insertarAmigos(){
+        require_once("../MODELO/class-usuarios.php");
+        if (isset($_GET['id'])) {
+            $amigos = new amigos();
+            $id_amigo = $_GET['id']; 
+            $amigo = $amigos->obtenerAmigo($id_amigo); 
+        }
+        $usuarios = new usuarios();
+        $listausuarios=$usuarios->mostrarUsuarios();
+        
         require_once("../VISTA/insertar.php");
     }
 
@@ -30,12 +47,6 @@
         $user = $_SESSION['user'];
         $listaAmigos = $amigos->listarAmigosNombre($_POST["bucador"],$user);
         require_once("../VISTA/amigos.php");
-    }
-    function modificar() {
-        $amigos = new amigos();
-        $id_amigo = $_GET['id']; 
-        $amigo = $amigos->obtenerAmigo($id_amigo); 
-        require_once("../VISTA/modificar_amigo.php"); 
     }
     
     function actualizar() {

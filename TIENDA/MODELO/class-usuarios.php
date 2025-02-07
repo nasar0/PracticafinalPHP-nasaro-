@@ -84,6 +84,7 @@
             } catch (Exception $e) {
                 echo "No se puede insertar: " . $e->getMessage();
             }
+            
     
         }
         public function obtenerUsuario($id_amigo) {

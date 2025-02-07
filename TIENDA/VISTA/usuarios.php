@@ -43,7 +43,7 @@
                                         <td class='align-middle'>{$usuarios->nombre_usuario}</td>
                                         <td class='align-middle'>".str_repeat('*', strlen($usuarios->contraseña))."</td>
                                     <td class='align-middle'>
-                                            <a href='listausuarios.php?action=modificar&id={$usuarios->id_usuarios}' class='btn btn-warning btn-sm pixel-button'>Modificar</a>
+                                            <a href='listausuarios.php?action=insertarUsuario&id={$usuarios->id_usuarios}' class='btn btn-warning btn-sm pixel-button'>Modificar</a>
                                         </td>
                                     </tr>";
                                 }
