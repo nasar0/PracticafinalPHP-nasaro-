@@ -1,5 +1,6 @@
 <?php
-require_once("class-conexion.php");
+require_once("class-conexion.php"); // Incluye el archivo de conexión a la base de datos
+// Definición de la clase juegos
 class juegos
 {
     private $db;
@@ -11,7 +12,7 @@ class juegos
     private $foto;
     public function __construct()
     {
-        $this->db = new con();
+        $this->db = new con();// Instancia de la conexión a la base de datos
         $this->id_juego = -1;
         $this->id_usuario = -1;
         $this->titulo = "";
@@ -19,12 +20,12 @@ class juegos
         $this->anio_lanzamiento = "";
         $this->foto = "";
     }
-
+    // Getter para obtener propiedades privadas
     public function __get($nom)
     {
         return $this->$nom;
     } 
-
+    // Método para listar los juegos de un usuario
     public function listarJuegos($nom)
     {
         $sent = "SELECT juegos.id_juego,juegos.id_usuario,juegos.titulo,juegos.plataforma,anio_lanzamiento,juegos.foto FROM usuarios,juegos WHERE usuarios.id_usuario=juegos.id_usuario and usuarios.nombre_usuario=?";
@@ -48,7 +49,8 @@ class juegos
         $consulta->close();
         return $juegos;
     }
-    public function obtenerAmigo($id_juego,$id_usuario) {
+    //Método para obtener el juego de un usuario
+    public function obtenerJuego($id_juego,$id_usuario) {
        $sent = "SELECT juegos.id_juego,juegos.id_usuario,juegos.titulo,juegos.plataforma,anio_lanzamiento,juegos.foto FROM usuarios,juegos WHERE usuarios.id_usuario=juegos.id_usuario and juegos.id_juego=? and usuarios.id_usuario=?";
         $consulta = $this->db->getCon()->prepare($sent);
         $consulta->bind_param("ii",$id_juego,$id_usuario);
@@ -65,6 +67,7 @@ class juegos
         $juegos->foto = $foto;
         return $juegos;
     }
+    //Método para modificar/actualizar un juego 
     public function modificarJuego($id_juego, $titulo, $plataforma, $anio_lanzamiento,$foto) {
         try {
             $sent = "UPDATE juegos SET titulo = ?, plataforma = ? ,anio_lanzamiento=? ";
@@ -83,8 +86,9 @@ class juegos
             echo "Error: " . $e->getMessage();
             return false;
         }
-        header("Location: ../CONTROLADOR/listajuegos.php");
+        
     }
+    // Método para listar juegos que coincidan con un nombre parcial
     public function listarJuegosNombre($string,$nom){
         $regex = $string."%";
         $sent= "SELECT j.id_juego,j.id_usuario,j.titulo,j.plataforma,j.anio_lanzamiento,j.foto FROM juegos j, usuarios WHERE usuarios.id_usuario = j.id_usuario AND j.titulo LIKE ? and usuarios.nombre_usuario=?";
@@ -108,6 +112,7 @@ class juegos
         $consulta->close();
         return $juegos;
     }
+    // Método para obtener el nombre de la foto del juego
     public function obtenerfoto($id){
         $sent= " SELECT foto FROM juegos WHERE id_juego = ?";
         $consulta = $this->db->getCon()->prepare($sent);
@@ -117,6 +122,7 @@ class juegos
         $consulta->fetch();
         return $foto;
     }
+    // Método para insertar un nuevo juego en la base de datos
     public function insertarJuegos($user,$tit,$pla,$ani,$fot){
         require_once('class-amigos.php');
         $usu=new amigos();
@@ -136,8 +142,9 @@ class juegos
         } catch (Exception $e) {
             echo "No se puede insertar: " . $e->getMessage();
         }
-        header("Location: ../CONTROLADOR/listajuegos.php");
+        
     }
+    //metodo para obtener para los prestamos un juego que no este prestado(no supe si iba en prestamos o aqui pues preferi dejarlo aqui)
     public function selectPrestamoJuegos($user){
         $sent ="SELECT juegos.id_juego, juegos.titulo FROM juegos LEFT JOIN prestamos ON juegos.id_juego = prestamos.id_juego JOIN usuarios ON juegos.id_usuario = usuarios.id_usuario WHERE usuarios.nombre_usuario = ? AND (prestamos.devuelto = 0 OR prestamos.id_juego IS NULL);";
         $consulta = $this->db->getCon()->prepare($sent);
