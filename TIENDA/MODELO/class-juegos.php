@@ -166,4 +166,4 @@ class juegos
         return $amigos;  
     }
 }
-
+?>

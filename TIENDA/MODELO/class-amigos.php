@@ -10,7 +10,6 @@ class amigos
     private $nombre;
     private $apellido;
     private $fecha;
-
     public function __construct()
     {
         $this->db = new con(); // Instancia de la conexión a la base de datos
@@ -47,7 +46,7 @@ class amigos
 
         $consulta->execute();
         $amigos = []; 
-
+        $usuNom="";
         while ($consulta->fetch()) {
             $amigo = new stdClass();
             $amigo->id_amigo = $id_amigo;
@@ -74,30 +73,32 @@ class amigos
     public function listarAmigosNombre($string, $nom)
     {
         $regex = $string . "%"; // Se usa para la búsqueda con LIKE en SQL
-        if (strcmp($nom, "ADMIN") == 0) {
+        if (strcmp($nom, "ADMIN") != 0) {
             $sent = "SELECT amigos.id_amigo, amigos.id_usuario, amigos.nombre, amigos.apellido, amigos.fecha_nacimiento 
                     FROM amigos, usuarios 
                     WHERE usuarios.id_usuario = amigos.id_usuario AND amigos.nombre LIKE ? ";
         } else {
-            $sent = "SELECT amigos.id_amigo, amigos.id_usuario, amigos.nombre, amigos.apellido, amigos.fecha_nacimiento 
+            $sent = "SELECT amigos.id_amigo, amigos.id_usuario, amigos.nombre, amigos.apellido, amigos.fecha_nacimiento ,usuarios.nombre_usuario 
                     FROM amigos, usuarios 
-                    WHERE usuarios.id_usuario = amigos.id_usuario AND amigos.nombre LIKE ? AND usuarios.nombre_usuario=? ";
+                    WHERE usuarios.id_usuario = amigos.id_usuario AND amigos.nombre LIKE ?  ";
         }
 
         $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("s", $regex);
+        
+        if (strcmp($nom, "ADMIN") != 0) {
+            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha);
 
-        if (strcmp($nom, "ADMIN") == 0) {
-            $consulta->bind_param("s", $regex);
         } else {
-            $consulta->bind_param("ss", $regex, $nom);
+            
+            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha, $usuNom);
         }
 
-        $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha);
         $consulta->execute();
         $amigos = [];
 
         while ($consulta->fetch()) {
-            $amigo = new amigos();
+            $amigo = new stdClass();
             $amigo->id_amigo = $id_amigo;
             $amigo->id_usuario = $id_usuario;
             $amigo->nombre = $nombre;
@@ -105,6 +106,7 @@ class amigos
             $timestamp = strtotime($fecha);
             $fecha = date("d/m/Y", $timestamp);
             $amigo->fecha = $fecha;
+            if (strcmp($nom, "ADMIN") == 0) $amigo->usuNom = $usuNom;
             $amigos[] = $amigo;
         }
 

@@ -41,7 +41,7 @@
                             echo "
                             <tr class='text-center align-middle'>
                                 <td>
-                                    <img src='../img/$user/{$juego->foto}' alt='{$juego->titulo}' class='img-fluid' style='max-width: 200px; height: auto;'>
+                                    <img src='../img/$user/{$juego->foto}' alt='{$juego->titulo}' class='img-fluid' style='max-width: 200px; max-height: 200px;'>
                                 </td>
                                 <td class='align-middle'>{$juego->titulo}</td>
                                 <td class='align-middle'>{$juego->plataforma}</td>

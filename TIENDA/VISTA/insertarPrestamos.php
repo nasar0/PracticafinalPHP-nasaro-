@@ -46,7 +46,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="anio_lanzamiento" class="form-label pixel-text">Dia:</label>
-                        <input type="date" id="fecha_prestamo" name="fecha_prestamo" class="pixel-input form-control" required>
+                        <input type="date" id="fecha_prestamo" min="<?php echo date("Y-m-d",time()-86400*3)  ?>" max="<?php echo date("Y-m-d",time()+86400*3)  ?>" name="fecha_prestamo" class="pixel-input form-control" required>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="pixel-button">>Enviar</button>

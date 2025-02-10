@@ -14,10 +14,10 @@
     <?php require_once("header.php") ?>
 
     <main class="container mt-4">
-        <section class="row mb-4">
-            <div class="col-12 text-end">
-                <a href="listausuarios.php?action=insertarUsuario" class="pixel-button me-3">Insertar usuario</a>
-                <a href="listausuarios.php?action=buscador" class="pixel-button">Buscar usuarios</a>
+        <section class="mb-4">
+            <div class="d-flex justify-content-end">
+                <a href="listausuarios.php?action=insertarUsuario" class="pixel-button">Insertar usuarios</a>
+                <a href="listausuarios.php?action=buscadorUsuarios" class="pixel-button ms-3">Buscar usuarios</a>
             </div>
         </section>
         <?php 
@@ -30,12 +30,12 @@
 
                             <div class="mb-3">
                                 <label for="nombre" class="form-label pixel-text">Nombre usuario:</label>
-                                <input type="text" class="pixel-input form-control" id="nombre" name="nombre" value="<?php echo $usu->nombre_usuario; ?>" required>
+                                <input type="text" class="pixel-input form-control" id="nombre" name="nombre" value="<?php echo $usu->nombre_usuario; ?>" required pattern="^[^\s]+$">
                             </div>
 
                             <div class="mb-3">
                                 <label for="apellido" class="form-label pixel-text">Contraseña:</label>
-                                <input type="text" class="pixel-input form-control" id="pass1" name="pass1" >
+                                <input type="password" class="pixel-input form-control" id="pass1" name="pass1" required pattern="^[^\s]+$">
                             </div>
 
                             <input type="hidden" name="pass" value="<?php echo $usu->contraseña; ?>">
@@ -54,17 +54,17 @@
                             <form action="../CONTROLADOR/listausuarios.php?action=insert" method="post" class="block-effect p-4">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label pixel-text">Nombre de usuario:</label>
-                                    <input type="text" id="nombre" name="nombre" class="pixel-input form-control" required>
+                                    <input type="text" id="nombre" name="nombre" class="pixel-input form-control" required pattern="^[^\s]+$">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="apellido" class="form-label pixel-text">Contraseña: </label>
-                                    <input type="password" id="pass" name="pass" class="pixel-input form-control" required>
+                                    <input type="password" id="pass" name="pass" class="pixel-input form-control" required pattern="^[^\s]+$">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="fecha_nacimiento" class="form-label pixel-text">Repite la Contraseña</label>
-                                    <input type="password" id="passs" name="pass2" class="pixel-input form-control" required>
+                                    <input type="password" id="passs" name="pass2" class="pixel-input form-control" required pattern="^[^\s]+$">
                                 </div>
 
                                 <div class="text-center">

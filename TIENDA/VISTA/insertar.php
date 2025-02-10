@@ -14,10 +14,10 @@
     <?php require_once("header.php") ?>
 
     <main class="container mt-4">
-        <section class="row mb-4">
-            <div class="col-12 text-end">
-                <a href="listaamigos.php?action=insertarAmigos" class="pixel-button me-3">Insertar amigos</a>
-                <a href="listaamigos.php?action=buscador" class="pixel-button">Buscar amigos</a>
+    <section class="mb-4">
+            <div class="d-flex justify-content-end">
+                <a href="listaamigos.php?action=insertarAmigos" class="pixel-button">Insertar amigos</a>
+                <a href="listaamigos.php?action=buscador" class="pixel-button ms-3">Buscar amigos</a>
             </div>
         </section>
         
@@ -35,12 +35,12 @@
                                 
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label pixel-text">Nombre:</label>
-                                    <input type="text" class="pixel-input form-control" id="nombre" name="nombre" value="<?php echo $amigo->nombre; ?>" required>
+                                    <input type="text" class="pixel-input form-control" id="nombre" name="nombre" value="<?php echo $amigo->nombre; ?>" required pattern="^[^\s]+$">>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="apellido" class="form-label pixel-text">Apellido:</label>
-                                    <input type="text" class="pixel-input form-control" id="apellido" name="apellido" value="<?php echo $amigo->apellido; ?>" required>
+                                    <input type="text" class="pixel-input form-control" id="apellido" name="apellido" value="<?php echo $amigo->apellido; ?>" required pattern="^[^\s]+$">>
                                 </div>
 
                                 <div class="mb-3">
@@ -72,12 +72,12 @@
                             <form action="../CONTROLADOR/listaamigos.php?action=insert" method="post" class="block-effect p-4">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label pixel-text">Nombre de tu amigo:</label>
-                                    <input type="text" id="nombre" name="nombre" class="pixel-input form-control" required>
+                                    <input type="text" id="nombre" name="nombre" class="pixel-input form-control" required pattern="^[^\s]+$">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="apellido" class="form-label pixel-text">Apellido de tu amigo:</label>
-                                    <input type="text" id="apellido" name="apellido" class="pixel-input form-control" required>
+                                    <input type="text" id="apellido" name="apellido" class="pixel-input form-control" required pattern="^[^\s]+$">
                                 </div>
 
                                 <div class="mb-3">

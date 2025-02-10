@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-02-2025 a las 08:43:36
+-- Tiempo de generación: 10-02-2025 a las 12:56:05
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -40,18 +40,9 @@ CREATE TABLE `amigos` (
 --
 
 INSERT INTO `amigos` (`id_amigo`, `id_usuario`, `nombre`, `apellido`, `fecha_nacimiento`) VALUES
-(1, 1, 'Luis', 'Martinez', '2000-09-03'),
-(2, 1, 'Ana', 'García', '1992-11-22'),
-(3, 2, 'Carlos', 'López', '1988-03-09'),
-(4, 3, 'Sofía', 'Hernández', '1995-07-30'),
-(5, 4, 'Diego', 'Torres', '1993-12-17'),
-(6, 1, 'angel', 'Martinez', '2010-01-02'),
-(20, 2, 'MAnue', 'Martinez', '2025-01-30'),
-(21, 2, '1', 'Martinez', '2025-02-02'),
-(22, 2, '2', '2', '2025-02-04'),
-(23, 2, '3', '3', '2025-01-29'),
-(24, 2, 'jaled', '4', '2025-01-27'),
-(25, 0, '3', 'el kaboussi', '2025-02-05');
+(29, 1, 'nasaro', 'nasaro', '2005-08-24'),
+(30, 2, 'angel ', 'espinosa', '2005-09-28'),
+(31, 2, 'nasaro', 'nasaro', '2025-01-30');
 
 -- --------------------------------------------------------
 
@@ -74,7 +65,7 @@ CREATE TABLE `juegos` (
 
 INSERT INTO `juegos` (`id_juego`, `id_usuario`, `titulo`, `plataforma`, `anio_lanzamiento`, `foto`) VALUES
 (1, 1, 'The Legend of Zelda: Breath of the Wild', 'Nintendo Switch', '2017', 'zelda.jpg'),
-(2, 2, 'The Witcher 3: Wild Hunt', 'PC,PlayStation4,3,5 y Xbox', '2015', '.jpg'),
+(2, 2, 'The Witcher 3: Wild Hunt', 'PC,PlayStation4,3,5 y Xbox', '2015', 'TheWitcher3.JPG'),
 (3, 2, 'God of War', 'PlayStation 4', '2018', 'gow.jpg'),
 (4, 3, 'Minecraft', 'PC', '2011', 'minecraft.jpg'),
 (5, 4, 'Red Dead Redemption 2', 'Xbox One', '2018', 'rdr2.jpg'),
@@ -96,19 +87,6 @@ CREATE TABLE `prestamos` (
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Volcado de datos para la tabla `prestamos`
---
-
-INSERT INTO `prestamos` (`id_prestamo`, `id_amigo`, `id_juego`, `fecha_prestamo`, `devuelto`, `id_usuario`) VALUES
-(6, 3, 3, '2025-01-31', 0, 4),
-(9, 3, 2, '2025-01-29', 0, 4),
-(10, 3, 6, '2025-02-03', 0, 2),
-(11, 20, 2, '2025-02-03', 0, 2),
-(12, 20, 2, '2025-02-03', 0, 2),
-(13, 3, 3, '2025-02-03', 0, 2),
-(14, 24, 3, '2025-02-05', 0, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -127,13 +105,11 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `contrasena`) VALUES
 (0, 'ADMIN', 'ADMIN'),
-(1, 'juan1234', 'password123'),
-(2, 'maria_g', 'securepass456'),
+(1, 'juan1234', 'juan1234'),
+(2, 'maria_g', 'maria_g'),
 (3, 'pablo98', 'mypassword789'),
-(4, 'carla87', 'anotherpass321'),
-(6, 'nasarop', ''),
-(7, 'nasaro23', ''),
-(8, 'nasaro22222', 'nasaro'),
+(4, 'carla87', 'carla87'),
+(8, 'nasaro22222', 'falete23@'),
 (9, 'nasaro', 'nasar1'),
 (10, 'nasaro', 'nasaro'),
 (11, 'nasaro', 'nasaro');
@@ -179,7 +155,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `amigos`
 --
 ALTER TABLE `amigos`
-  MODIFY `id_amigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_amigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
@@ -191,7 +167,7 @@ ALTER TABLE `juegos`
 -- AUTO_INCREMENT de la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
