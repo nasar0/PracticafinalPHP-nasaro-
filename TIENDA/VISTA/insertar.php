@@ -35,12 +35,12 @@
                                 
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label pixel-text">Nombre:</label>
-                                    <input type="text" class="pixel-input form-control" id="nombre" name="nombre" value="<?php echo $amigo->nombre; ?>" required pattern="^[^\s]+$">>
+                                    <input type="text" class="pixel-input form-control" id="nombre" name="nombre" value="<?php echo $amigo->nombre; ?>" required pattern="^[^\s]+(\s[^\s]+)*$">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="apellido" class="form-label pixel-text">Apellido:</label>
-                                    <input type="text" class="pixel-input form-control" id="apellido" name="apellido" value="<?php echo $amigo->apellido; ?>" required pattern="^[^\s]+$">>
+                                    <input type="text" class="pixel-input form-control" id="apellido" name="apellido" value="<?php echo $amigo->apellido; ?>" required pattern="^[^\s]+(\s[^\s]+)*$">
                                 </div>
 
                                 <div class="mb-3">
@@ -72,12 +72,12 @@
                             <form action="../CONTROLADOR/listaamigos.php?action=insert" method="post" class="block-effect p-4">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label pixel-text">Nombre de tu amigo:</label>
-                                    <input type="text" id="nombre" name="nombre" class="pixel-input form-control" required pattern="^[^\s]+$">
+                                    <input type="text" id="nombre" name="nombre" class="pixel-input form-control" required pattern="^[^\s]+(\s[^\s]+)*$">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="apellido" class="form-label pixel-text">Apellido de tu amigo:</label>
-                                    <input type="text" id="apellido" name="apellido" class="pixel-input form-control" required pattern="^[^\s]+$">
+                                    <input type="text" id="apellido" name="apellido" class="pixel-input form-control" required pattern="^[^\s]+(\s[^\s]+)*$">
                                 </div>
 
                                 <div class="mb-3">

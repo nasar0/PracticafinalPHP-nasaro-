@@ -146,7 +146,18 @@ class juegos
     }
     //metodo para obtener para los prestamos un juego que no este prestado(no supe si iba en prestamos o aqui pues preferi dejarlo aqui)
     public function selectPrestamoJuegos($user){
-        $sent ="SELECT juegos.id_juego, juegos.titulo FROM juegos LEFT JOIN prestamos ON juegos.id_juego = prestamos.id_juego JOIN usuarios ON juegos.id_usuario = usuarios.id_usuario WHERE usuarios.nombre_usuario = ? AND (prestamos.devuelto = 0 OR prestamos.id_juego IS NULL);";
+        $sent ="SELECT juegos.id_juego, juegos.titulo
+FROM juegos
+JOIN usuarios ON juegos.id_usuario = usuarios.id_usuario
+LEFT JOIN (
+    SELECT id_juego, MAX(id_prestamo) AS ultimo_prestamo
+    FROM prestamos
+    GROUP BY id_juego
+) AS ultimo_prestamo ON juegos.id_juego = ultimo_prestamo.id_juego
+LEFT JOIN prestamos ON prestamos.id_prestamo = ultimo_prestamo.ultimo_prestamo
+WHERE usuarios.nombre_usuario = ?
+AND (prestamos.devuelto = 0 OR prestamos.devuelto IS NULL);
+";
         $consulta = $this->db->getCon()->prepare($sent);
 
         $consulta->bind_param("s", $user);

@@ -67,6 +67,7 @@
         if (strcmp($_POST["pass"], $_POST["pass2"]) == 0) {
             $usuarios->insertarAmigos($_POST["nombre"], $_POST["pass"]);
         }
+        header("Location: ../CONTROLADOR/listausuarios.php?action=usuarios");
     }
 
     // Función para actualizar un usuario
@@ -82,7 +83,15 @@
         // Redirección a la lista de usuarios después de actualizar
         header("Location: ../CONTROLADOR/listausuarios.php?action=usuarios");
     }
-
+    function salir(){
+        session_start();// Inicia la sesión
+        unset($_SESSION['user']); // Elimina solo la variable 'user'
+        session_destroy(); // Destruye la sesión completamente
+        //Redirigir a la página de inicio de sesión
+        header("Location: ../VISTA/index.php");
+        exit;
+    }
+    
     // Verifica si hay una acción en la solicitud y la ejecuta
     if(isset($_REQUEST['action'])){
         $action = $_REQUEST['action'];
@@ -90,4 +99,6 @@
     } else {
         login(); // Si no hay acción especificada, muestra la pantalla de login
     }
+     
+    
 ?>

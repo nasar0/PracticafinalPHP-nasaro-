@@ -5,7 +5,6 @@
     // Función para mostrar la lista de amigos
     function mostrar() {
         $amigos = new amigos();
-        session_start(); // Se inicia la sesión
         $user = $_SESSION['user']; // Se obtiene el usuario de la sesión
         $listaAmigos = $amigos->listarColegas($user); // Se obtiene la lista de amigos del usuario
         require_once("../VISTA/amigos.php"); // Se carga la vista de amigos
@@ -98,10 +97,18 @@
     }
 
     // Verifica si hay una acción en la solicitud y la ejecuta
-    if (isset($_REQUEST['action'])) {
-        $action = $_REQUEST['action'];
-        $action(); // Llama a la función con el nombre especificado en `action`
-    } else {
-        mostrar(); // Si no hay acción especificada, muestra la lista de amigos por defecto
+    session_start();
+    if (isset($_SESSION['user'])){
+        if (isset($_REQUEST['action'])) {
+            $action = $_REQUEST['action'];
+            $action(); // Llama a la función con el nombre especificado en `action`
+        } else {
+            mostrar(); // Si no hay acción especificada, muestra la lista de amigos por defecto
+        } 
+    }else{
+        header("Location: ../VISTA/index.php");
     }
+        
+    
+    
 ?>

@@ -23,7 +23,7 @@
                     echo '<a href="listaprestamos.php?action=mostrarPrestamos" class="pixel-button">Préstamos</a>';
                 }
                 ?>
-                <a href="../VISTA/index.php" class="pixel-button">Salir</a>
+                <a href="listausuarios.php?action=salir" class="pixel-button">Salir</a>
             </div>
         </nav>
     </header>

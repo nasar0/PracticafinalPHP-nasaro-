@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-02-2025 a las 12:56:05
+-- Tiempo de generación: 11-02-2025 a las 11:44:14
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -42,7 +42,8 @@ CREATE TABLE `amigos` (
 INSERT INTO `amigos` (`id_amigo`, `id_usuario`, `nombre`, `apellido`, `fecha_nacimiento`) VALUES
 (29, 1, 'nasaro', 'nasaro', '2005-08-24'),
 (30, 2, 'angel ', 'espinosa', '2005-09-28'),
-(31, 2, 'nasaro', 'nasaro', '2025-01-30');
+(31, 2, 'nasaro', 'nasaro', '2025-01-30'),
+(32, 2, 'nasaro', 'el kaboussi', '2000-08-24');
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,7 @@ CREATE TABLE `juegos` (
 
 INSERT INTO `juegos` (`id_juego`, `id_usuario`, `titulo`, `plataforma`, `anio_lanzamiento`, `foto`) VALUES
 (1, 1, 'The Legend of Zelda: Breath of the Wild', 'Nintendo Switch', '2017', 'zelda.jpg'),
-(2, 2, 'The Witcher 3: Wild Hunt', 'PC,PlayStation4,3,5 y Xbox', '2015', 'TheWitcher3.JPG'),
+(2, 2, 'The Witcher 3: Wild Hunt.', 'PC,PlayStation4,3,5 y Xbox', '2015', 'TheWitcher3.JPG'),
 (3, 2, 'God of War', 'PlayStation 4', '2018', 'gow.jpg'),
 (4, 3, 'Minecraft', 'PC', '2011', 'minecraft.jpg'),
 (5, 4, 'Red Dead Redemption 2', 'Xbox One', '2018', 'rdr2.jpg'),
@@ -86,6 +87,19 @@ CREATE TABLE `prestamos` (
   `devuelto` tinyint(1) NOT NULL DEFAULT 0,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `prestamos`
+--
+
+INSERT INTO `prestamos` (`id_prestamo`, `id_amigo`, `id_juego`, `fecha_prestamo`, `devuelto`, `id_usuario`) VALUES
+(48, 30, 2, '2025-02-14', 0, 2),
+(49, 30, 2, '2025-02-12', 0, 2),
+(50, 30, 3, '2025-02-14', 0, 2),
+(51, 30, 6, '2025-02-12', 0, 2),
+(52, 30, 7, '2025-02-12', 0, 2),
+(53, 30, 6, '2025-02-12', 0, 2),
+(54, 30, 7, '2025-02-12', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -111,8 +125,7 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `contrasena`) VALUES
 (4, 'carla87', 'carla87'),
 (8, 'nasaro22222', 'falete23@'),
 (9, 'nasaro', 'nasar1'),
-(10, 'nasaro', 'nasaro'),
-(11, 'nasaro', 'nasaro');
+(12, 'ADMIN2', 'ADMIN2');
 
 --
 -- Índices para tablas volcadas
@@ -145,7 +158,8 @@ ALTER TABLE `prestamos`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `nombre_usuario` (`nombre_usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -155,7 +169,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `amigos`
 --
 ALTER TABLE `amigos`
-  MODIFY `id_amigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_amigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
@@ -167,13 +181,13 @@ ALTER TABLE `juegos`
 -- AUTO_INCREMENT de la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas

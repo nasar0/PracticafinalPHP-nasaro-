@@ -5,7 +5,6 @@
     // Función para mostrar la lista de juegos del usuario
     function mostrarJuegos() {
         $juegos = new juegos();
-        session_start(); // Se inicia la sesión
         $user = $_SESSION['user']; // Se obtiene el usuario de la sesión
         $listaJuego = $juegos->listarJuegos($user); // Se obtiene la lista de juegos
         require_once("../VISTA/juegos.php"); // Se carga la vista de juegos
@@ -58,13 +57,6 @@
         exit;
     }
 
-    // Verifica si hay una acción en la solicitud y la ejecuta
-    if (isset($_REQUEST['action'])) {
-        $action = $_REQUEST['action'];
-        $action(); // Llama a la función con el nombre especificado en `action`
-    } else {
-        mostrarJuegos(); // Si no hay acción especificada, se muestran los juegos
-    }
 
     // Función para mostrar la vista del buscador de juegos
     function buscador() {
@@ -115,4 +107,19 @@
         $listaJuego = $juego->listarJuegosNombre($_POST["bucador"], $user); // Se busca en la base de datos
         require_once("../VISTA/juegos.php"); // Se carga la vista con los resultados
     }
+     // Verifica si hay una acción en la solicitud y la ejecuta
+    
+    
+        
+     session_start();
+     if (isset($_SESSION['user'])){
+         if (isset($_REQUEST['action'])) {
+             $action = $_REQUEST['action'];
+             $action(); // Llama a la función con el nombre especificado en `action`
+         } else {
+             mostrarJuegos(); // Si no hay acción especificada, se muestran los juegos
+         }
+     }else{
+         header("Location: ../VISTA/index.php");
+     }
 ?>

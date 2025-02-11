@@ -7,7 +7,6 @@
     // Función para mostrar la lista de préstamos
     function mostrarPrestamos(){
         $prestamo = new prestamos();
-        session_start(); // Se inicia la sesión
         $user = $_SESSION['user']; // Se obtiene el usuario de la sesión
         $listaPrestamos = $prestamo->mostrar($user); // Se obtienen los préstamos del usuario
         require_once("../VISTA/prestamos.php"); // Se carga la vista de préstamos
@@ -59,11 +58,18 @@
         header("Location: ../CONTROLADOR/listaprestamos.php");
     }
 
-    // Verifica si hay una acción en la solicitud y la ejecuta
-    if (isset($_REQUEST['action'])) {
-        $action = $_REQUEST['action'];
-        $action(); // Llama a la función con el nombre especificado en `action`
-    } else {
-        mostrarPrestamos(); // Si no hay acción especificada, muestra la lista de préstamos por defecto
-    }
+    
+    
+     session_start();
+     if (isset($_SESSION['user'])){
+        // Verifica si hay una acción en la solicitud y la ejecuta
+        if (isset($_REQUEST['action'])) {
+            $action = $_REQUEST['action'];
+            $action(); // Llama a la función con el nombre especificado en `action`
+        } else {
+            mostrarPrestamos(); // Si no hay acción especificada, muestra la lista de préstamos por defecto
+        }// Verifica si hay una acción en la solicitud y la ejecuta
+     }else{
+         header("Location: ../VISTA/index.php");
+     }
 ?>

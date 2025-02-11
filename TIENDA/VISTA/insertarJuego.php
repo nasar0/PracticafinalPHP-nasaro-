@@ -31,17 +31,21 @@
                             
                             <div class="mb-3">
                                 <label for="titulo"  class="form-label pixel-text">Título:</label>
-                                <input type="text" class="pixel-input form-control" id="titulo" name="titulo" value="<?php echo $juego->titulo; ?>" required pattern="^[^\s]+$">
+                                <input type="text" class="pixel-input form-control" id="titulo" name="titulo" value="<?php echo $juego->titulo; ?>" required pattern="^[^\s]+(\s[^\s]+)*$">
+
+
                             </div>
 
                             <div class="mb-3">
                                 <label for="plataforma"  class="form-label pixel-text">Plataforma:</label>
-                                <input type="text" class="pixel-input form-control" id="plataforma" name="plataforma" value="<?php echo $juego->plataforma; ?>" required pattern="^[^\s]+$">
+                                <input type="text" class="pixel-input form-control" id="plataforma" name="plataforma" value="<?php echo $juego->plataforma; ?>" required pattern="^[^\s]+(\s[^\s]+)*$">
                             </div>
 
                             <div class="mb-3">
                                 <label for="anio_lanzamiento"  class="form-label pixel-text">Año de Lanzamiento:</label>
-                                <input type="number" class="pixel-input form-control" id="anio_lanzamiento" name="anio_lanzamiento" value="<?php echo $juego->anio_lanzamiento; ?>" required pattern="^[^\s]+$">
+                                <input type="number" class="pixel-input form-control" id="anio_lanzamiento" name="anio_lanzamiento" value="<?php echo $juego->anio_lanzamiento; ?>" required pattern="^[^\s]+(\s[^\s]+)*$">
+
+
                             </div>
 
                             <div class="mb-3">
@@ -64,15 +68,21 @@
                             <form action="../CONTROLADOR/listajuegos.php?action=insert" method="post" enctype="multipart/form-data" class="block-effect p-4">
                                 <div class="mb-3">
                                     <label for="titulo" class="form-label pixel-text">Título:</label>
-                                    <input type="text" id="titulo" name="titulo" class="pixel-input form-control" required pattern="^[^\s]+$">
+                                    <input type="text" id="titulo" name="titulo" class="pixel-input form-control" required pattern="^[^\s]+(\s[^\s]+)*$">
+
+
                                 </div>
                                 <div class="mb-3">
                                     <label for="plataforma" class="form-label pixel-text">Plataforma:</label>
-                                    <input type="text" id="plataforma" name="plataforma" class="pixel-input form-control" required pattern="^[^\s]+$">
+                                    <input type="text" id="plataforma" name="plataforma" class="pixel-input form-control" required pattern="^[^\s]+(\s[^\s]+)*$">
+
+
                                 </div>
                                 <div class="mb-3">
                                     <label for="anio_lanzamiento" class="form-label pixel-text">Año de Lanzamiento:</label>
-                                    <input type="number" id="anio_lanzamiento" name="anio_lanzamiento" class="pixel-input form-control" required pattern="^[^\s]+$">
+                                    <input type="number" id="anio_lanzamiento" name="anio_lanzamiento" class="pixel-input form-control" required pattern="^[^\s]+(\s[^\s]+)*$">
+
+
                                 </div>
                                 <div class="mb-3">
                                     <label for="foto" class="form-label pixel-text">Foto:</label>
