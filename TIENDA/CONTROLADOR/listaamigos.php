@@ -60,7 +60,6 @@
     // Función para buscar amigos por nombre
     function buscar() {
         $amigos = new amigos();
-        session_start();
         $user = $_SESSION['user']; // Se obtiene el usuario de la sesión
         // Se busca en la base de datos según el nombre ingresado en el formulario
         $listaAmigos = $amigos->listarAmigosNombre($_POST["bucador"], $user);

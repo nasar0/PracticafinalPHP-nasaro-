@@ -42,7 +42,7 @@
     // Función para buscar préstamos en la base de datos
     function buscadorPrestamos() {
         $prestamo = new prestamos();
-        session_start();
+        // session_start();
         $user = $_SESSION['user']; // Se obtiene el usuario de la sesión
         // Se busca el préstamo por el término ingresado en el formulario
         $listaPrestamos = $prestamo->buscar($_POST["bucador"], $user);

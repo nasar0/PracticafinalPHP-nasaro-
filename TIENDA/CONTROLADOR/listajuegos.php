@@ -102,7 +102,6 @@
     // Función para buscar juegos por nombre
     function buscar() {
         $juego = new juegos();
-        session_start();
         $user = $_SESSION['user']; // Se obtiene el usuario de la sesión
         $listaJuego = $juego->listarJuegosNombre($_POST["bucador"], $user); // Se busca en la base de datos
         require_once("../VISTA/juegos.php"); // Se carga la vista con los resultados
