@@ -24,22 +24,22 @@ class amigos
     public function listarColegas($nom)
     {
         if (strcmp($nom, "ADMIN") == 0) { 
+            $punt =0 ;
             // Si el usuario es ADMIN, obtiene todos los amigos con nombre de usuario
             $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento,usuarios.nombre_usuario 
                     FROM amigos, usuarios 
                     WHERE usuarios.id_usuario=amigos.id_usuario;";
+
         } else {
             // Si no es ADMIN, filtra por nombre de usuario
-            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento 
-                    FROM amigos, usuarios 
-                    WHERE usuarios.id_usuario=amigos.id_usuario AND usuarios.nombre_usuario=? ";
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento,SUM(prestamos.puntuacion)/COUNT(prestamos.puntuacion) FROM usuarios, amigos LEFT JOIN prestamos on prestamos.id_amigo=amigos.id_amigo WHERE usuarios.id_usuario=amigos.id_usuario AND usuarios.nombre_usuario=? and amigos.verificado=1 GROUP BY amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento;";
         }
 
         $consulta = $this->db->getCon()->prepare($sent);
 
         if (strcmp($nom, "ADMIN") != 0) {
             $consulta->bind_param("s", $nom);
-            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha);
+            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha,$punt);
         } else {
             $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha, $usuNom);
         }
@@ -57,6 +57,7 @@ class amigos
             $fecha = date("d/m/Y", $timestamp);
             $amigo->fecha = $fecha;
             if (strcmp($nom, "ADMIN") == 0) $amigo->usuNom = $usuNom;
+            $amigo->punt=$punt;
             $amigos[] = $amigo;
         }
 
@@ -214,5 +215,95 @@ class amigos
         $consulta->close();
         return $amigos;
     }
+    //examen
+    public function ordenarAmigosNombre($user,$num)
+    {
+        $nom="";
+        if ($num == 0 ) {
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento,SUM(prestamos.puntuacion)/COUNT(prestamos.puntuacion) FROM usuarios, amigos LEFT JOIN prestamos on prestamos.id_amigo=amigos.id_amigo WHERE usuarios.id_usuario=amigos.id_usuario AND usuarios.nombre_usuario=? GROUP BY amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento ORDER BY amigos.nombre DESC;";
+            $cont = 1;
+        }else{
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento,SUM(prestamos.puntuacion)/COUNT(prestamos.puntuacion) FROM usuarios, amigos LEFT JOIN prestamos on prestamos.id_amigo=amigos.id_amigo WHERE usuarios.id_usuario=amigos.id_usuario AND usuarios.nombre_usuario=? GROUP BY amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento ORDER BY amigos.nombre ;";
+            $cont = 0;
+        }
+
+        $consulta = $this->db->getCon()->prepare($sent);
+
+        if (strcmp($nom, "ADMIN") != 0) {
+            $consulta->bind_param("s", $user);
+            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha,$punt);
+        } else {
+            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha, $usuNom);
+        }
+
+        $consulta->execute();
+        $amigos = []; 
+        $usuNom="";
+        while ($consulta->fetch()) {
+            $amigo = new stdClass();
+            $amigo->id_amigo = $id_amigo;
+            $amigo->id_usuario = $id_usuario;
+            $amigo->nombre = $nombre;
+            $amigo->apellido = $apellido;
+            $timestamp = strtotime($fecha);
+            $fecha = date("d/m/Y", $timestamp);
+            $amigo->fecha = $fecha;
+            if (strcmp($nom, "ADMIN") == 0) $amigo->usuNom = $usuNom;
+            $amigo->punt=$punt;
+            $amigos[] = $amigo;
+        }
+
+        $consulta->close();
+        return $amigos;
+    }
+
+    public function ordenarAmigosFecha($user,$num)
+    {
+        $nom="";
+        if ($num == 0 ) {
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento,SUM(prestamos.puntuacion)/COUNT(prestamos.puntuacion) FROM usuarios, amigos LEFT JOIN prestamos on prestamos.id_amigo=amigos.id_amigo WHERE usuarios.id_usuario=amigos.id_usuario AND usuarios.nombre_usuario=? GROUP BY amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento ORDER BY amigos.fecha_nacimiento DESC";
+            $cont = 1;
+        }else{
+            $sent = "SELECT amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento,SUM(prestamos.puntuacion)/COUNT(prestamos.puntuacion) FROM usuarios, amigos LEFT JOIN prestamos on prestamos.id_amigo=amigos.id_amigo WHERE usuarios.id_usuario=amigos.id_usuario AND usuarios.nombre_usuario=? GROUP BY amigos.id_amigo,amigos.id_usuario,amigos.nombre,amigos.apellido,amigos.fecha_nacimiento ORDER BY amigos.fecha_nacimiento asc ;";
+            $cont = 0;
+        }
+
+        $consulta = $this->db->getCon()->prepare($sent);
+
+        if (strcmp($nom, "ADMIN") != 0) {
+            $consulta->bind_param("s", $user);
+            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha,$punt);
+        } else {
+            $consulta->bind_result($id_amigo, $id_usuario, $nombre, $apellido, $fecha, $usuNom);
+        }
+
+        $consulta->execute();
+        $amigos = []; 
+        $usuNom="";
+        while ($consulta->fetch()) {
+            $amigo = new stdClass();
+            $amigo->id_amigo = $id_amigo;
+            $amigo->id_usuario = $id_usuario;
+            $amigo->nombre = $nombre;
+            $amigo->apellido = $apellido;
+            $timestamp = strtotime($fecha);
+            $fecha = date("d/m/Y", $timestamp);
+            $amigo->fecha = $fecha;
+            if (strcmp($nom, "ADMIN") == 0) $amigo->usuNom = $usuNom;
+            $amigo->punt=$punt;
+            $amigos[] = $amigo;
+        }
+
+        $consulta->close();
+        return $amigos;
+    }
+    function verificar($id_amigo){
+        $sent = "UPDATE amigos SET verificado = 1 WHERE id_amigo = ?";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("i", $id_amigo);
+        $consulta->execute();
+        $consulta->close();
+    }
+
 }
 ?>

@@ -58,7 +58,14 @@
         header("Location: ../CONTROLADOR/listaprestamos.php");
     }
 
-    
+    function puntuar(){
+        $prestamo = new prestamos();
+        $id_prestamo = $_GET['id']; // Se obtiene el ID del préstamo a devolver
+        $punt = $_POST['punt'];
+        $prestamo->puntuar($id_prestamo,$punt); // Se procesa la devolución
+        // Se redirige a la lista de préstamos
+        header("Location: ../CONTROLADOR/listaprestamos.php");
+    }
     
      session_start();
      if (isset($_SESSION['user'])){

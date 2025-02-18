@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-02-2025 a las 11:44:14
+-- Tiempo de generación: 18-02-2025 a las 12:37:08
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -32,18 +32,21 @@ CREATE TABLE `amigos` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellido` varchar(255) NOT NULL,
-  `fecha_nacimiento` date NOT NULL
+  `fecha_nacimiento` date NOT NULL,
+  `verificado` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `amigos`
 --
 
-INSERT INTO `amigos` (`id_amigo`, `id_usuario`, `nombre`, `apellido`, `fecha_nacimiento`) VALUES
-(29, 1, 'nasaro', 'nasaro', '2005-08-24'),
-(30, 2, 'angel ', 'espinosa', '2005-09-28'),
-(31, 2, 'nasaro', 'nasaro', '2025-01-30'),
-(32, 2, 'nasaro', 'el kaboussi', '2000-08-24');
+INSERT INTO `amigos` (`id_amigo`, `id_usuario`, `nombre`, `apellido`, `fecha_nacimiento`, `verificado`) VALUES
+(29, 1, 'nasaro', 'nasaro', '2005-08-24', 1),
+(30, 2, 'angel ', 'espinosa', '2005-09-28', 1),
+(31, 2, 'nasaro', 'nasaro', '2025-01-30', 1),
+(32, 2, 'nasaro', 'el kaboussi', '2000-08-24', 1),
+(33, 4, 'juan', 'perez sintilde', '2000-12-30', 1),
+(34, 2, 'MAnue', '4', '2025-02-12', 1);
 
 -- --------------------------------------------------------
 
@@ -85,21 +88,18 @@ CREATE TABLE `prestamos` (
   `id_juego` int(11) NOT NULL,
   `fecha_prestamo` date NOT NULL,
   `devuelto` tinyint(1) NOT NULL DEFAULT 0,
-  `id_usuario` int(11) NOT NULL
+  `id_usuario` int(11) NOT NULL,
+  `puntuacion` decimal(3,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `prestamos`
 --
 
-INSERT INTO `prestamos` (`id_prestamo`, `id_amigo`, `id_juego`, `fecha_prestamo`, `devuelto`, `id_usuario`) VALUES
-(48, 30, 2, '2025-02-14', 0, 2),
-(49, 30, 2, '2025-02-12', 0, 2),
-(50, 30, 3, '2025-02-14', 0, 2),
-(51, 30, 6, '2025-02-12', 0, 2),
-(52, 30, 7, '2025-02-12', 0, 2),
-(53, 30, 6, '2025-02-12', 0, 2),
-(54, 30, 7, '2025-02-12', 0, 2);
+INSERT INTO `prestamos` (`id_prestamo`, `id_amigo`, `id_juego`, `fecha_prestamo`, `devuelto`, `id_usuario`, `puntuacion`) VALUES
+(59, 30, 2, '2025-02-15', 0, 2, 5.00),
+(60, 30, 2, '2025-02-18', 0, 2, 0.00),
+(61, 31, 7, '2025-02-18', 0, 2, 5.00);
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,7 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `contrasena`) VALUES
 (0, 'ADMIN', 'ADMIN'),
 (1, 'juan1234', 'juan1234'),
 (2, 'maria_g', 'maria_g'),
-(3, 'pablo98', 'mypassword789'),
+(3, 'pablo98', 'pablo98'),
 (4, 'carla87', 'carla87'),
 (8, 'nasaro22222', 'falete23@'),
 (9, 'nasaro', 'nasar1'),
@@ -169,7 +169,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `amigos`
 --
 ALTER TABLE `amigos`
-  MODIFY `id_amigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_amigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
@@ -181,7 +181,7 @@ ALTER TABLE `juegos`
 -- AUTO_INCREMENT de la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

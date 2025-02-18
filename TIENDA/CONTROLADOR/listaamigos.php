@@ -4,6 +4,7 @@
 
     // Función para mostrar la lista de amigos
     function mostrar() {
+        $cont=0;
         $amigos = new amigos();
         $user = $_SESSION['user']; // Se obtiene el usuario de la sesión
         $listaAmigos = $amigos->listarColegas($user); // Se obtiene la lista de amigos del usuario
@@ -94,8 +95,44 @@
         header("Location: listaamigos.php?action=mostrar");
         exit;
     }
-
+    function botonOrdenar(){
+        if (isset($_GET['cont'])) {
+            $cont = $_GET['cont'];
+        }
+        $amigos = new amigos();
+        $user = $_SESSION['user']; // Se obtiene el usuario de la sesión
+        intval($cont);
+        $listaAmigos = $amigos->ordenarAmigosNombre($user,$cont); // Se obtiene la lista de amigos del usuario
+        if ($cont ==0) {
+            $cont=1;
+        }else{
+            $cont=0;
+        }
+        require_once("../VISTA/amigos.php"); // Se carga la vista de amigos
+    }
+    function botonOrdenar2(){
+        if (isset($_GET['cont'])) {
+            $cont = $_GET['cont'];
+        }
+        $amigos = new amigos();
+        $user = $_SESSION['user']; // Se obtiene el usuario de la sesión
+        intval($cont);
+        $listaAmigos = $amigos->ordenarAmigosFecha($user,$cont); // Se obtiene la lista de amigos del usuario
+        if ($cont ==0) {
+            $cont=1;
+        }else{
+            $cont=0;
+        }
+        require_once("../VISTA/amigos.php"); // Se carga la vista de amigos
+    }
     // Verifica si hay una acción en la solicitud y la ejecuta
+    function verificar(){
+        $amigos = new amigos();
+        $id = $_GET['id']; // Se obtiene el ID del préstamo a devolver
+        $amigos->verificar($id); // Se procesa la devolución
+        // Se redirige a la lista de préstamos
+        header("Location: ../CONTROLADOR/listaamigos.php");
+    }
     session_start();
     if (isset($_SESSION['user'])){
         if (isset($_REQUEST['action'])) {

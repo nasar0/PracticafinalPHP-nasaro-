@@ -31,8 +31,18 @@
                                     <th scope="col">Apellido</th>
                                     <th scope="col">Fecha de Nacimiento</th>
                                     <?php if (strcmp($user, "ADMIN") == 0) echo "<th scope='col'> Nombre Usuario </th>" ?>
+                                    <?php if (strcmp($user, "ADMIN") != 0) echo "<th scope='col'> Puntuacion </th>" ?>
                                     <th scope="col">Acciones</th>
-
+                                    <?php 
+                                    if (strcmp($user, "ADMIN") != 0)
+                                        echo"<td class='align-middle'>
+                                        <a href='listaamigos.php?action=botonOrdenar&cont={$cont}' class='btn btn-warning btn-sm pixel-button'>ordenar nombre</a>
+                                    </td>
+                                    <td class='align-middle'>
+                                        <a href='listaamigos.php?action=botonOrdenar2&cont={$cont}' class='btn btn-warning btn-sm pixel-button'>ordena fechar</a>
+                                    </td>
+                                </tr>"
+                                    ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,11 +54,16 @@
                                         <td class='align-middle'>{$amigo->apellido}</td>
                                         <td class='align-middle'>{$amigo->fecha}</td>";
                                     if (strcmp($user, "ADMIN") == 0) echo "<td class='align-middle'>{$amigo->usuNom}</td>";
+                                    if (strcmp($user, "ADMIN") != 0) echo "<td class='align-middle'>{$amigo->punt}</td>";
                                     echo "<td class='align-middle'>
                                             <a href='listaamigos.php?action=insertarAmigos&id={$amigo->id_amigo}' class='btn btn-warning btn-sm pixel-button'>Modificar</a>
-                                        </td>
-                                    </tr>";
+                                        </td>";
+                                    if (strcmp($user, "ADMIN") == 0)
+                                    echo "<td class='align-middle'>
+                                        <a href='listaamigos.php?action=verificar&id={$amigo->id_amigo}' class='btn btn-warning btn-sm pixel-button'>VERIFICAR</a>
+                                    </td>";
                                 }
+                                ;
                                 ?>
                             </tbody>
                         </table>

@@ -128,5 +128,15 @@ class prestamos
         $consulta->execute();
         $consulta->close();
     }
+
+    public function puntuar($id_prestamo,$num)
+    {
+        $sent = "UPDATE prestamos SET puntuacion = ? WHERE id_prestamo = ?";
+        $consulta = $this->db->getCon()->prepare($sent);
+        $consulta->bind_param("di", $num,$id_prestamo);
+        $consulta->execute();
+        $consulta->close();
+    }
+    
 }
 ?>

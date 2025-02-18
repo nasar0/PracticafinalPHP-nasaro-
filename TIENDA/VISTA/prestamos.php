@@ -50,6 +50,7 @@
                                             <td class='align-middle'>";
                                              if ($prestamo->devuelto == 0) {
                                                 echo "<button disabled class='btn btn-warning btn-sm pixel-button'>Devolver</button>";
+                                                echo"<form action='listaprestamos.php?action=puntuar&id={$prestamo->id_prestamo}' method='POST'> <input type='number' min='0.00' step='0.1' max='5.00' name='punt'> <input type='submit'> </form>";
                                              }else{
                                                 echo "<a href='listaprestamos.php?action=devolver&id={$prestamo->id_prestamo}' class='btn btn-warning btn-sm pixel-button' >Devolver</a>";
                                              }
