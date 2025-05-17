@@ -42,7 +42,7 @@ Este es el proyecto final de **Desarrollo Web en Entorno Servidor**, desarrollad
 ---
 
 ## 📂 Estructura del proyecto
-```bash
+ ```bash
 /PROYECTO/
 │
 ├── CONTROLADOR/
@@ -59,6 +59,7 @@ Este es el proyecto final de **Desarrollo Web en Entorno Servidor**, desarrollad
 │ └── class-usuarios.php
 │
 ├── VISTA/
+│ ├── index.php
 │ ├── login.php
 │ ├── amigos.php
 │ ├── juegos.php
@@ -66,11 +67,8 @@ Este es el proyecto final de **Desarrollo Web en Entorno Servidor**, desarrollad
 │ ├── insertar.php
 │ └── otros formularios y vistas...
 │
-├── index.php
 └── README.md
-
-```
-
+ ```
 ---
 
 ## 🧑‍💻 Tecnologías utilizadas
@@ -107,8 +105,6 @@ Inicia el servidor Apache y MySQL desde tu panel de control (ej. XAMPP).
 Accede desde tu navegador:
 
  ```arduino
-Copiar
-Editar
 http://localhost/agenda-amigos-juegos
  ```
 ## Inicia sesión con las credenciales por defecto:
