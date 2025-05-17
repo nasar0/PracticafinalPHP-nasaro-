@@ -95,7 +95,7 @@ Este es el proyecto final de **Desarrollo Web en Entorno Servidor**, desarrollad
 1. Clona este repositorio en la carpeta `htdocs` (si usas XAMPP):
 
    ```bash
-   git clone https://github.com/tuusuario/agenda-amigos-juegos.git
+   git clone https://github.com/nasar0/PracticafinalPHP-nasaro-.git
 Importa el archivo .sql con la estructura y datos de ejemplo de la base de datos (si está incluido).
 
 Configura los parámetros de conexión a la base de datos en los archivos del modelo (class-*.php).
@@ -105,7 +105,7 @@ Inicia el servidor Apache y MySQL desde tu panel de control (ej. XAMPP).
 Accede desde tu navegador:
 
  ```arduino
-http://localhost/agenda-amigos-juegos
+http://localhost/PracticafinalPHP-nasaro-
  ```
 ## Inicia sesión con las credenciales por defecto:
 
