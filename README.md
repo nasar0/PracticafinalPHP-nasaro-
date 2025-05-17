@@ -42,7 +42,7 @@ Este es el proyecto final de **Desarrollo Web en Entorno Servidor**, desarrollad
 ---
 
 ## 📂 Estructura del proyecto
-
+```bash
 /PROYECTO/
 │
 ├── CONTROLADOR/
@@ -69,9 +69,7 @@ Este es el proyecto final de **Desarrollo Web en Entorno Servidor**, desarrollad
 ├── index.php
 └── README.md
 
-yaml
-Copiar
-Editar
+```
 
 ---
 
